@@ -1,12 +1,14 @@
 <script lang="ts">
+	import { signIn, signOut } from '@auth/sveltekit/client';
 	import Sidebar from './sidebar.svelte';
 	import Button from './ui/button.svelte';
+	import { page } from '$app/stores';
 
 	let { sidebarOpen = $bindable(false) }: { sidebarOpen: boolean } = $props();
 </script>
 
 <header
-	class="bg-primary text-background fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between px-4 py-4 shadow-md"
+	class="fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between bg-primary px-4 py-4 text-background shadow-md"
 >
 	<div class="flex items-center gap-4">
 		<Button
@@ -37,15 +39,20 @@
 		</a>
 	</nav>
 
-	<Button
-		click={() => {
-			sidebarOpen = !sidebarOpen;
-		}}
-		additionalStyle="text-background"
-	>
-		<span class="material-symbols-outlined">person</span>
-		<span>Sign in</span>
-	</Button>
+	<div class="flex flex-row items-center justify-center">
+		{#if $page.data.user}
+			<span class="mr-4">{$page.data.user.name}</span>
+			<Button click={() => signOut()} additionalStyle="text-background">
+				<span class="material-symbols-outlined">person</span>
+				<span>Sign out</span>
+			</Button>
+		{:else}
+			<Button click={() => signIn('google')} additionalStyle="text-background">
+				<span class="material-symbols-outlined">person</span>
+				<span>Sign in</span>
+			</Button>
+		{/if}
+	</div>
 </header>
 <div class="h-16"></div>
 

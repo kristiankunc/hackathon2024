@@ -24,21 +24,15 @@ export const actions = {
 			return fail(400, { title: 'Employee category is required and must be a string' });
 		}
 
-		try {
-			// Vytvoření nového zaměstnance
-			await prisma.employee.create({
-				data: {
-					firstName,
-					lastName,
-					email,
-					employeeCategoryId: parseInt(employeeCategoryId, 10)
-				}
-			});
+		await prisma.employee.create({
+			data: {
+				firstName,
+				lastName,
+				email,
+				employeeCategoryId: parseInt(employeeCategoryId, 10)
+			}
+		});
 
-			throw redirect(303, '/employees');
-		} catch (error) {
-			console.error('Error creating employee:', error);
-			return fail(500, { error: 'An error occurred while creating the employee.' });
-		}
+		throw redirect(303, '/employees');
 	}
 } satisfies Actions;

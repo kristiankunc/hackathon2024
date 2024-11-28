@@ -4,6 +4,7 @@
 	import '../app.css';
 
 	let { children } = $props();
+	let sidebarOpen = $state(false);
 </script>
 
 <svelte:head>
@@ -13,5 +14,5 @@
 	/>
 </svelte:head>
 
-<Navbar />
-{@render children?.()}
+<Navbar bind:sidebarOpen />
+<div class="transition-all {sidebarOpen ? 'ml-64' : 'ml-0'}">{@render children?.()}</div>

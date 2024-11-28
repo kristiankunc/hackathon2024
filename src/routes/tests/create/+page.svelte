@@ -85,7 +85,8 @@
 					id="content"
 					rows="4"
 					placeholder="Enter content here..."
-					class="mt-1 block min-h-48 w-full rounded-lg border border-gray-300 p-4 text-sm placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
+					name="description"
+					class="mt-1 block min-h-80 w-full rounded-lg border border-gray-300 p-4 text-sm placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
 				></textarea>
 			</div>
 

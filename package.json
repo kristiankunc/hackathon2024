@@ -53,6 +53,7 @@
 		"@prisma/client": "^5.22.0",
 		"dotenv": "^16.4.5",
 		"layerchart": "^0.59.5",
-		"nodemailer": "^6.9.16"
+		"nodemailer": "^6.9.16",
+		"ts-node": "^10.9.2"
 	}
 }

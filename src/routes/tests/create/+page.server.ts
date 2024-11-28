@@ -1,7 +1,6 @@
-import { PrismaClient } from '@prisma/client';
 import { fail, redirect, type Actions } from '@sveltejs/kit';
-
-const prisma = new PrismaClient();
+import { prisma } from '$lib/prisma';
+import type { Prisma } from '@prisma/client';
 
 export const actions = {
 	default: async ({ request, locals }) => {
@@ -23,15 +22,13 @@ export const actions = {
 		}
 
 		try {
-			await prisma.$transaction(async (tx) => {
-				// Nejprve vytvoříme test
+			await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
 				const test = await tx.test.create({
 					data: {
 						name
 					}
 				});
 
-				// Poté vytvoříme Admin a spojíme ho s testem
 				const admin = await tx.admin.create({
 					data: {
 						email: user.email,
@@ -39,7 +36,6 @@ export const actions = {
 					}
 				});
 
-				// A přidáme admina do pole admins testu
 				await tx.test.update({
 					where: {
 						id: test.id

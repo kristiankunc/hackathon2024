@@ -7,6 +7,7 @@ export const actions = {
 		const data = await request.formData();
 
 		let name = data.get('name');
+
 		let user = locals.user;
 
 		if (!user) {

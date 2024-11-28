@@ -27,6 +27,10 @@ export const actions = {
 			return fail(400, { title: 'Name must be a string' });
 		}
 
+		if (typeof description !== 'string') {
+			return fail(400, { title: 'Description must be a string' });
+		}
+
 		await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
 			const test = await tx.test.create({
 				data: {

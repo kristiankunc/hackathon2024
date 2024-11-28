@@ -11,7 +11,7 @@
 	<AppSidebar />
 	<main class="w-full">
 		<Navbar />
-		<Sidebar.Trigger />
+		<Sidebar.Trigger class="m-2" />
 		{@render children?.()}
 	</main>
 </Sidebar.Provider>

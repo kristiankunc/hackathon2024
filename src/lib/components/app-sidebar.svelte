@@ -37,9 +37,11 @@
 </script>
 
 <Sidebar.Root>
-	<Sidebar.Content>
+	<Sidebar.Content class="bg-background-950">
 		<Sidebar.Group>
-      <div class="h-8"></div>
+      <div class="w-full flex justify-center items-center rounded-lg h-20">
+        <h3 class="font-semibold">PhishTest</h3>
+      </div>
 			<Sidebar.GroupContent>
 				<Sidebar.Menu>
 					{#each items as item (item.title)}

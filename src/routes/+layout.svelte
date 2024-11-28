@@ -12,5 +12,3 @@
 	  {@render children?.()}
 	</main>
 </Sidebar.Provider>
-
-{@render children()}

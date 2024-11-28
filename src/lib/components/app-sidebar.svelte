@@ -4,7 +4,10 @@
 	import Inbox from 'lucide-svelte/icons/inbox';
 	import Search from 'lucide-svelte/icons/search';
 	import Settings from 'lucide-svelte/icons/settings';
+	import Logout from 'lucide-svelte/icons/log-out';
+	import User from 'lucide-svelte/icons/user';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
+	import * as Avatar from '$lib/components/ui/avatar/index.js';
 
 	// Menu items.
 	const items = [
@@ -37,9 +40,14 @@
 </script>
 
 <Sidebar.Root>
+	<Sidebar.Header>
+		<Avatar.Root>
+			<Avatar.Image src="https://github.com/shadcn.png" alt="@shadcn" />
+			<Avatar.Fallback>Avatar</Avatar.Fallback>
+		</Avatar.Root>
+	</Sidebar.Header>
 	<Sidebar.Content>
 		<Sidebar.Group>
-			<Sidebar.GroupLabel>Application</Sidebar.GroupLabel>
 			<Sidebar.GroupContent>
 				<Sidebar.Menu>
 					{#each items as item (item.title)}
@@ -58,4 +66,16 @@
 			</Sidebar.GroupContent>
 		</Sidebar.Group>
 	</Sidebar.Content>
+	<Sidebar.Footer>
+		<Sidebar.MenuItem>
+			<Sidebar.MenuButton>
+				{#snippet child({ props })}
+					<a href="#" {...props}>
+						<Logout />
+						<span>Logout</span>
+					</a>
+				{/snippet}
+			</Sidebar.MenuButton>
+		</Sidebar.MenuItem>
+	</Sidebar.Footer>
 </Sidebar.Root>

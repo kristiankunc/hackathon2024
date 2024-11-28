@@ -1,10 +1,13 @@
 <script lang="ts">
-	import Calendar from 'lucide-svelte/icons/calendar';
 	import House from 'lucide-svelte/icons/house';
 	import Inbox from 'lucide-svelte/icons/inbox';
 	import Search from 'lucide-svelte/icons/search';
 	import Settings from 'lucide-svelte/icons/settings';
+	import Logout from 'lucide-svelte/icons/log-out';
+	import Fish from 'lucide-svelte/icons/fish';
+	import UserList from 'lucide-svelte/icons/book-user';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
+	import * as Avatar from '$lib/components/ui/avatar/index.js';
 
 	// Menu items.
 	const items = [
@@ -14,14 +17,14 @@
 			icon: House
 		},
 		{
-			title: 'Inbox',
+			title: 'Phishing',
 			url: '#',
-			icon: Inbox
+			icon: Fish
 		},
 		{
-			title: 'Calendar',
+			title: 'Lists',
 			url: '#',
-			icon: Calendar
+			icon: UserList
 		},
 		{
 			title: 'Search',
@@ -37,7 +40,13 @@
 </script>
 
 <Sidebar.Root>
-	<Sidebar.Content class="bg-background-950">
+	<Sidebar.Header>
+		<Avatar.Root>
+			<Avatar.Image src="https://github.com/shadcn.png" alt="@shadcn" />
+			<Avatar.Fallback>Avatar</Avatar.Fallback>
+		</Avatar.Root>
+	</Sidebar.Header>
+	<Sidebar.Content>
 		<Sidebar.Group>
       <div class="w-full flex justify-center items-center rounded-lg h-20">
         <h3 class="font-semibold">PhishTest</h3>
@@ -60,4 +69,16 @@
 			</Sidebar.GroupContent>
 		</Sidebar.Group>
 	</Sidebar.Content>
+	<Sidebar.Footer>
+		<Sidebar.MenuItem>
+			<Sidebar.MenuButton>
+				{#snippet child({ props })}
+					<a href="#" {...props}>
+						<Logout />
+						<span>Logout</span>
+					</a>
+				{/snippet}
+			</Sidebar.MenuButton>
+		</Sidebar.MenuItem>
+	</Sidebar.Footer>
 </Sidebar.Root>

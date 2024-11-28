@@ -1,10 +1,13 @@
 import { fail, redirect, type Actions } from '@sveltejs/kit';
 import { prisma } from '$lib/prisma';
 import type { Prisma } from '@prisma/client';
+import { base } from '$app/paths';
 
 export const actions = {
 	createTest: async ({ request, locals }) => {
 		const data = await request.formData();
+
+		const domain = request.url.split('/').at(2);
 
 		let name = data.get('name');
 		let description = data.get('description');
@@ -87,7 +90,7 @@ export const actions = {
 
 				try {
 					console.log('Sending email:', emailData);
-					const response = await fetch("/send-email", {
+					const response = await fetch("http://" + domain + "/send-email", {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json'
@@ -98,13 +101,11 @@ export const actions = {
 					if (!response.ok) {
 						throw new Error(`HTTP error! status: ${response.status}`);
 					}
-			
-					const result = await response.json();
-					console.log('Email sent successfully:', result);
+					
+					console.log('Email sent:', emailData);
 				} catch (error) {
 					console.error('Error sending email:', error);
 				}
-				console.log('Email sent');
 		}
 
 		console.log('Category:', category);

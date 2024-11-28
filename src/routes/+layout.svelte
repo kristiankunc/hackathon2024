@@ -7,6 +7,7 @@
 	let { children } = $props();
 </script>
 
+<Navbar />
 <Sidebar.Provider>
 	<AppSidebar />
 	<main class="w-full">

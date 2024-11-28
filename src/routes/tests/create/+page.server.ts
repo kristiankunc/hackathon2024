@@ -34,6 +34,14 @@ export const actions = {
 			return fail(400, { title: 'Message content is required' });
 		}
 
+		if (!category) {
+			return fail(400, { title: 'Category is required' });
+		}
+
+		if (!employeeGroup) {
+			return fail(400, { title: 'Employee group is required' });
+		}
+
 		if (typeof name !== 'string') {
 			return fail(400, { title: 'Name must be a string' });
 		}
@@ -110,7 +118,8 @@ export const actions = {
 					throw new Error(`HTTP error! status: ${response.status}`);
 				}
 
-				console.log('Email sent:', emailData);
+
+				console.log('Response status:', response.status);
 			} catch (error) {
 				console.error('Error sending email:', error);
 			}

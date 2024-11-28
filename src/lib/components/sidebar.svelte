@@ -9,9 +9,9 @@
 
 		$effect(() => {
 			if (open) {
-				nav!.classList.remove('-translate-x-64');
+				nav!.classList.remove('-translate-x-72');
 			} else {
-				nav!.classList.add('-translate-x-64');
+				nav!.classList.add('-translate-x-72');
 			}
 		});
 	});
@@ -19,7 +19,7 @@
 
 <div
 	id="nav"
-	class="fixed bottom-0 top-16 z-40 flex w-64 -translate-x-64 flex-col items-center gap-4 bg-background-950 py-16 shadow-md transition-transform"
+	class="fixed bottom-0 top-16 z-40 flex w-64 -translate-x-72 flex-col items-center gap-4 bg-background-950 py-16 shadow transition-transform"
 >
 	<Button preset="borderless" colorScheme="text" href="/" click={() => (open = false)}>
 		<span class="material-symbols-outlined">person</span>

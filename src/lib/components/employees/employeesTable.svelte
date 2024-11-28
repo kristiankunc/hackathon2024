@@ -12,6 +12,7 @@
 			<th scope="col" class="px-6 py-3 text-left text-sm font-medium tracking-wider">
 				Description
 			</th>
+			<th scope="col" class="px-6 py-3 text-left text-sm font-medium tracking-wider">Category</th>
 			<th scope="col" class="px-6 py-3 text-left text-sm font-medium tracking-wider">
 				Success Rate
 			</th>
@@ -24,9 +25,10 @@
 				<td class="px-6 py-4">{employee.firstName}</td>
 				<td class="px-6 py-4">{employee.lastName}</td>
 				<td class="px-6 py-4">{employee.email}</td>
+				<td class="px-6 py-4">{employee.category.name}</td>
 				<td class="px-6 py-4">{employee.employeeCategoryId}%</td>
 				<td class="px-6 py-4">
-					<Button>View</Button>
+					<a href={`/employees/${employee.id}`}><Button>View</Button></a>
 				</td>
 			</tr>
 		{/each}

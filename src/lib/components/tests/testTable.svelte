@@ -26,7 +26,7 @@
 				<td class="px-6 py-4">{test.description}</td>
 				<td class="px-6 py-4">{test.successRate}%</td>
 				<td class="px-6 py-4">
-					<Button>View</Button>
+					<a href={`/tests/${test.id}`}><Button>View</Button></a>
 				</td>
 			</tr>
 		{/each}

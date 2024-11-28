@@ -18,9 +18,9 @@
 		<h4 class="text-sm">{mail}</h4>
 	</div>
 	{#if passed}
-		<Check class="text-primary" />
+		<Check class="text-[#51c6aa]" />
 	{:else}
-		<Ban class="text-accent" />
+		<Ban class="text-[#cf7d6d]" />
 	{/if}
 	<Button preset="skeleton">
 		<Ellipsis />

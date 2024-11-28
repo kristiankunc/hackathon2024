@@ -19,22 +19,22 @@
 
 <div
 	id="nav"
-	class="bg-background-950 z-40 fixed flex gap-4 top-16 bottom-0 w-64 -translate-x-64 flex-col items-center py-16 shadow-md transition-transform"
+	class="fixed bottom-0 top-16 z-40 flex w-64 -translate-x-64 flex-col items-center gap-4 bg-background-950 py-16 shadow-md transition-transform"
 >
-	<Button style="flex gap-2">
+	<Button preset="borderless">
 		<span class="material-symbols-outlined">person</span>
 		<h3>Account</h3>
 	</Button>
-	<Button style="flex gap-2">
+	<Button preset="borderless">
 		<span class="material-symbols-outlined">phishing</span>
 		<h3>Phishing</h3>
 	</Button>
-	<Button style="flex gap-2">
+	<Button preset="borderless">
 		<span class="material-symbols-outlined">labs</span>
 		<h3>Tests</h3>
 	</Button>
-  <div class="grow"></div>
-	<Button style="flex gap-2">
+	<div class="grow"></div>
+	<Button preset="borderless">
 		<span class="material-symbols-outlined">settings</span>
 		<h3>Settings</h3>
 	</Button>

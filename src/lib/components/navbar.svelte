@@ -9,7 +9,7 @@
 </script>
 
 <header
-	class={`fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between ${transparentPaths.includes($page.url.pathname) ? 'bg-transparent' : 'bg-background-950'} px-4 py-4 shadow`}
+	class={`fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between bg-background-950 px-4 py-4 shadow`}
 >
 	<div class="flex items-center gap-2">
 		<Button

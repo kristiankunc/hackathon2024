@@ -1,5 +1,5 @@
 <script lang="ts">
-	import EmployeesTable from '$lib/components/employeesTable.svelte';
+	import EmployeesTable from '$lib/components/employees/employeesTable.svelte';
 
 	let { data } = $props();
 </script>

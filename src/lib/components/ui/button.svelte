@@ -8,6 +8,7 @@
 		preset = 'fill',
 		colorScheme = 'primary',
 		href = null,
+    disableDefaults = false,
 		children
 	}: {
 		additionalStyle?: string;
@@ -16,6 +17,7 @@
 		preset?: 'skeleton' | 'fill' | 'borderless';
 		colorScheme?: 'primary' | 'secondary' | 'accent' | 'background';
 		href?: string | null;
+    disableDefaults?: boolean;
 		children: Snippet;
 	} = $props();
 
@@ -53,7 +55,7 @@
 			' text-' +
 			colorSchemes[colorScheme].c1 +
 			' hover:bg-' +
-			colorSchemes[colorScheme].c3,
+			colorSchemes[colorScheme].c4,
 		fill:
 			'border border-' +
 			colorSchemes[colorScheme].c1 +
@@ -72,7 +74,9 @@
 {#if href}
 	<a
 		{href}
-		class="flex items-center justify-center gap-2 rounded-lg p-2 transition-colors {presets[
+		class="{disableDefaults
+			? ''
+			: 'flex items-center justify-center gap-2 rounded-lg p-2 transition-colors'} {presets[
 			preset
 		]} {additionalStyle}"
 	>
@@ -82,7 +86,9 @@
 	<button
 		{type}
 		onclick={() => click()}
-		class="flex items-center justify-center gap-2 rounded-lg p-2 transition-colors {presets[
+		class="{disableDefaults
+			? ''
+			: 'flex items-center justify-center gap-2 rounded-lg p-2 transition-colors'} {presets[
 			preset
 		]} {additionalStyle}"
 	>

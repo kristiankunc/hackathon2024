@@ -42,9 +42,9 @@
 
 	<div class="flex flex-row items-center justify-center">
 		{#if $page.data.user}
-			<span class="mr-4">{$page.data.user.name}</span>
-			<Button click={() => signOut()} additionalStyle="text-background">
-				<span class="material-symbols-outlined">person</span>
+			<span class="material-symbols-outlined mr-1">person</span>
+			<span class="mr-4 text-sm font-semibold">{$page.data.user.name}</span>
+			<Button click={() => signOut()} preset="skeleton" colorScheme="background">
 				<span>Sign out</span>
 			</Button>
 		{:else}

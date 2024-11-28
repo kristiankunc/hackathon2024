@@ -1,9 +1,21 @@
 <script lang="ts">
+	import Sidebar from './sidebar.svelte';
+	import Button from './ui/button.svelte';
+
+	let sidebarOpen = $state(false);
 </script>
 
 <header class="bg-primary text-background flex items-center justify-between px-4 py-4 shadow-md">
-	<div class="text-lg font-bold">
-		<a href="/">LOGO</a>
+	<div class="flex items-center gap-4">
+		<Button
+			style="flex items-center"
+			click={() => {
+				sidebarOpen = !sidebarOpen;
+			}}
+		>
+			<span class="material-symbols-outlined">menu</span>
+		</Button>
+		<a class="text-lg font-bold" href="/">LOGO</a>
 	</div>
 	<nav class="flex gap-12 text-white">
 		<a href="/about" class="group transition duration-300">
@@ -22,7 +34,16 @@
 			></span>
 		</a>
 	</nav>
-	<!-- <Button class="bg-white text-text border border-white hover:bg-primary hover:text-white hover:border font-bold py-2 px-4 rounded-lg"> -->
-	<!--   Sign In -->
-	<!-- </Button> -->
+
+	<Button
+		click={() => {
+			sidebarOpen = !sidebarOpen;
+		}}
+    additionalStyle="text-background"
+	>
+		<span class="material-symbols-outlined">person</span>
+    <span>Sign in</span>
+	</Button>
 </header>
+
+<Sidebar open={sidebarOpen} />

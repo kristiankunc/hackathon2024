@@ -83,6 +83,7 @@
 				<label for="content" class="block text-sm font-medium text-gray-700">Edit content</label>
 				<textarea
 					id="content"
+					name="emailText"
 					rows="4"
 					placeholder="Enter content here..."
 					name="description"

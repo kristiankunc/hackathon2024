@@ -11,6 +11,8 @@ export const actions = {
 
 		let user = locals.user;
 
+		let emailText = data.get('emailText');
+
 		let category = data.get('category');
 		let employeeGroup = data.get('employeeGroup');
 		console.log(employeeGroup);
@@ -76,6 +78,37 @@ export const actions = {
 
 		});
 
+		const sendEmail = async () => {
+			for (let employee of employees) {
+				const emailData = {
+					to: employee.email, // Recipient's email address
+					subject: name,      // Subject of the email
+					text: emailText // Email content
+				};
+
+				try {
+					const response = await fetch("https://localhost:5173/send-email", {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify(emailData)
+					});
+			
+					if (!response.ok) {
+						throw new Error(`HTTP error! status: ${response.status}`);
+					}
+			
+					const result = await response.json();
+					console.log('Email sent successfully:', result);
+				} catch (error) {
+					console.error('Error sending email:', error);
+				}
+			}
+		}
+
+
+		sendEmail();
 
 		throw redirect(303, `/tests`);
 	}

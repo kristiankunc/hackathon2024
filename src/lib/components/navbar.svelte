@@ -12,10 +12,11 @@
 >
 	<div class="flex items-center gap-4">
 		<Button
-			style="flex items-center"
 			click={() => {
 				sidebarOpen = !sidebarOpen;
 			}}
+			preset="borderless"
+			colorScheme="background"
 		>
 			<span class="material-symbols-outlined">menu</span>
 		</Button>
@@ -47,7 +48,7 @@
 				<span>Sign out</span>
 			</Button>
 		{:else}
-			<Button click={() => signIn('google')} additionalStyle="text-background">
+			<Button click={() => signIn('google')} preset="borderless" colorScheme="background">
 				<span class="material-symbols-outlined">person</span>
 				<span>Sign in</span>
 			</Button>

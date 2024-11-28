@@ -10,13 +10,12 @@
 	let { children } = $props();
 </script>
 
+<Navbar />
 <Sidebar.Provider>
 	<AppSidebar />
-	<main>
-		<Sidebar.Trigger />
+	<main class="w-full">
+		<Navbar />
+		<Sidebar.Trigger class="m-2" />
 		{@render children?.()}
 	</main>
 </Sidebar.Provider>
-
-<Navbar />
-{@render children()}

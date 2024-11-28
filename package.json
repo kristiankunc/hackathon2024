@@ -2,6 +2,9 @@
 	"name": "hackathon2024",
 	"version": "0.0.1",
 	"type": "module",
+	"main": "dist/index.js",
+	"module": "dist/index.js",
+	"svelte": "dist/index.js",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",

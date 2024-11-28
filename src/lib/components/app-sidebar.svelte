@@ -48,6 +48,7 @@
 	</Sidebar.Header>
 	<Sidebar.Content>
 		<Sidebar.Group>
+      <div class="h-8"></div>
 			<Sidebar.GroupContent>
 				<Sidebar.Menu>
 					{#each items as item (item.title)}

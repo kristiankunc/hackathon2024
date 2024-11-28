@@ -13,6 +13,7 @@ const setLocals: Handle = async ({ event, resolve }) => {
 			status: 302,
 			headers: {
 				Location: '/auth/signin'
+				// location: '/landing'
 			}
 		});
 	}

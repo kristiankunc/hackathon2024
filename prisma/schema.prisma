@@ -8,12 +8,13 @@ datasource db {
 }
 
 model Test {
-    id          Int        @id @default(autoincrement())
-    name        String
-    description String
-    admins      Admin[]
-    employees   Employee[]
-    logs        Log[]
+    id             Int        @id @default(autoincrement())
+    name           String
+    description    String
+    messageContent String?     @db.LongText
+    admins         Admin[]
+    employees      Employee[]
+    logs           Log[]
 }
 
 model Admin {

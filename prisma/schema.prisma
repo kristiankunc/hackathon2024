@@ -8,17 +8,18 @@ datasource db {
 }
 
 model Test {
-    id        Int        @id @default(autoincrement())
-    name      String
-    admins    Admin[]
-    employees Employee[]
-    Log       Log[]
+    id          Int        @id @default(autoincrement())
+    name        String
+    description String
+    admins      Admin[]
+    employees   Employee[]
+    logs        Log[]
 }
 
 model Admin {
     id     Int    @id @default(autoincrement())
     email  String
-    Test   Test   @relation(fields: [testId], references: [id])
+    test   Test   @relation(fields: [testId], references: [id])
     testId Int
 }
 
@@ -28,8 +29,8 @@ model Employee {
     lastName           String
     email              String
     category           EmployeeCategory @relation(fields: [employeeCategoryId], references: [id])
-    Tests              Test[]
-    Log                Log[]
+    tests              Test[]
+    logs               Log[]
     employeeCategoryId Int
 }
 

@@ -4,10 +4,10 @@
 </script>
 
 <div class="px-8 py-4">
-	<header class="mb-6">
+	<div class="mb-6">
 		<h1 class="text-2xl font-bold text-gray-800">Create a New Test</h1>
 		<p class="text-gray-600">Fill out the form below to create a new test.</p>
-	</header>
+	</div>
 
 	<section class="rounded bg-white p-6 shadow">
 		<form class="space-y-6" method="POST" action="?/createTest">

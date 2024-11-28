@@ -6,7 +6,7 @@ export const load: PageServerLoad = async () => {
 		include: {
 			admins: true,
 			employees: true,
-			Log: true
+			logs: true
 		}
 	});
 	return { tests };

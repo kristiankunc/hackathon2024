@@ -1,34 +1,47 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
+import type { RequestHandler } from '@sveltejs/kit';
 
 dotenv.config();
 
-/** @type {import('@sveltejs/kit').RequestHandler} */
-export async function POST({ request }) {
-    const { to, subject, text } = await request.json();
+interface EmailRequest {
+    to: string;
+    subject: string;
+    text: string;
+}
 
-    // Nastavení Nodemailer transportu
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: process.env.EMAIL_USER, // Nahraďte vaším Gmailem
-            pass: process.env.EMAIL_PASS // Použijte heslo aplikace (viz níže)
-        }
-    });
-
+export const POST: RequestHandler = async ({ request }) => {
     try {
-        console.log(process.env.EMAIL_USER, process.env.EMAIL_PASS);
+        // Parsování příchozího JSON požadavku
+        const { to, subject, text }: EmailRequest = await request.json();
+
+        // Nastavení Nodemailer transportu
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USER, // Váš Gmail
+                pass: process.env.EMAIL_PASS // Heslo aplikace
+            }
+        });
+
         // Odeslání e-mailu
         await transporter.sendMail({
-            from: 'hackathonArab@gmail.com',
+            from: process.env.EMAIL_USER, // Výchozí odesílatel
             to,
             subject,
             text
         });
 
-        return new Response(JSON.stringify({ message: 'E-mail odeslán!' }), { status: 200 });
+        return new Response(JSON.stringify({ message: 'E-mail odeslán!' }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+        });
     } catch (error) {
-        console.error(error);
-        return new Response(JSON.stringify({ error: 'Chyba při odesílání e-mailu.' }), { status: 500 });
+        console.error('Chyba při odesílání e-mailu:', error);
+
+        return new Response(JSON.stringify({ error: 'Chyba při odesílání e-mailu.' }), {
+            status: 500,
+            headers: { 'Content-Type': 'application/json' }
+        });
     }
-}
+};

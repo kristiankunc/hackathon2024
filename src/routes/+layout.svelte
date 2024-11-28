@@ -15,4 +15,4 @@
 </svelte:head>
 
 <Navbar bind:sidebarOpen />
-<div class="transition-all {sidebarOpen ? 'ml-64' : 'ml-0'}">{@render children?.()}</div>
+<div class="transition-[margin-left] {sidebarOpen ? 'ml-64' : 'ml-0'}">{@render children?.()}</div>

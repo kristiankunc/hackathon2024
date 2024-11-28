@@ -5,10 +5,11 @@
 	import { page } from '$app/stores';
 
 	let { sidebarOpen = $bindable(false) }: { sidebarOpen: boolean } = $props();
+	let transparentPaths = ['/landing'];
 </script>
 
 <header
-	class="fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between bg-primary px-4 py-4 text-background shadow-md"
+	class={`fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between ${transparentPaths.includes($page.url.pathname) ? 'bg-transparent' : 'bg-primary'} px-4 py-4 text-background shadow-md`}
 >
 	<div class="flex items-center gap-4">
 		<Button

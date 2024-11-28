@@ -4,7 +4,6 @@
 
 	const date = new Date();
 	let { data } = $props();
-	console.log(data.successRate);
 
 	const graphData = [
 		{

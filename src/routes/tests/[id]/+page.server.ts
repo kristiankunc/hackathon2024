@@ -16,7 +16,7 @@ export const load = async ({ id }: { id: number }) => {
 		}
 	});
 
-	const successRate = totalLogs > 0 ? (successfulLogs / totalLogs) * 100 : 0;
+	const successRate = totalLogs > 0 ? Math.round((successfulLogs / totalLogs) * 100) : 0;
 
 	console.log(successRate);
 	return { successRate };

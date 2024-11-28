@@ -10,6 +10,19 @@ export const actions = {
 
 		let user = locals.user;
 
+		let category = data.get('category');
+		let employeeGroup = data.get('employeeGroup');
+		const groupId = await prisma.employeeCategory.findMany({
+			where: {
+				name: employeeGroup
+			},
+			select: {
+				id: true
+			}
+		});
+		console.log("=====")
+		console.log(groupId);
+
 		if (!user) {
 			return fail(400, { title: 'Not logged in' });
 		}
@@ -45,7 +58,11 @@ export const actions = {
 					}
 				}
 			});
+
 		});
+
+		console.log(await prisma.employee.findMany())
+	
 
 		throw redirect(303, `/tests`);
 	}

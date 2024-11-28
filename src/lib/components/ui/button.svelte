@@ -104,7 +104,7 @@
 <div class="hidden hover:bg-primary-900"></div>
 <div class="hidden hover:bg-secondary-900"></div>
 <div class="hidden hover:bg-accent-900"></div>
-<!-- <div class="hidden hover:bg-background-900"></div> -->
+<div class="hidden hover:bg-background-900"></div>
 <!-- <div class="hidden hover:bg-primary-700"></div> -->
 <!-- <div class="hidden hover:bg-secondary-700"></div> -->
 <!-- <div class="hidden hover:bg-accent-700"></div> -->

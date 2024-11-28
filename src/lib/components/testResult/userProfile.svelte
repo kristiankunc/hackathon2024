@@ -7,7 +7,7 @@
 	import Ellipsis from 'lucide-svelte/icons/ellipsis';
 	import Check from 'lucide-svelte/icons/check';
 	import Ban from 'lucide-svelte/icons/ban';
-	import Button from '../ui/button/button.svelte';
+	// import Button from '../ui/button/button.svelte';
 </script>
 
 <div class="bg-background-950 mb-2 flex w-full items-center justify-between rounded-lg p-4">
@@ -21,7 +21,7 @@
 	{:else}
 		<Ban class="text-accent" />
 	{/if}
-	<Button variant="ghost">
-		<Ellipsis />
-	</Button>
+	<!-- <Button variant="ghost"> -->
+	<!-- 	<Ellipsis /> -->
+	<!-- </Button> -->
 </div>

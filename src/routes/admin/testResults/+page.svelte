@@ -1,5 +1,5 @@
 <script lang="ts">
-	import UserProfile from '$lib/components/testResult/userProfile.svelte';
+	import UserProfile from '$lib/components/tests/userProfile.svelte';
 	import { BarChart, Chart, ColorRamp, Pie, PieChart, Svg } from 'layerchart';
 
 	const date = new Date();
@@ -25,9 +25,9 @@
 		<div class="flex h-fit items-center rounded-lg border p-4">
 			<div class="w-1/3 text-center">
 				<h3 class="text-xl font-semibold">Risky behaviour:</h3>
-				<h2 class="text-accent text-4xl font-bold">{data[1].value}%</h2>
+				<h2 class="text-4xl font-bold text-accent">{data[1].value}%</h2>
 				<h3 class="mt-8 font-semibold">Safe behaviour:</h3>
-				<h2 class="text-primary text-3xl font-bold">{data[0].value}%</h2>
+				<h2 class="text-3xl font-bold text-primary">{data[0].value}%</h2>
 			</div>
 			<div class="h-72 grow p-4">
 				<Chart {data} x="value" c="color" cRange={keyColors}>
@@ -38,8 +38,8 @@
 			</div>
 		</div>
 
-		<div class="max-h-[50vh] h-fit grow rounded-lg overflow-y-scroll border p-4">
-			<h2 class="font-semibold mb-4">Participants:</h2>
+		<div class="h-fit max-h-[50vh] grow overflow-y-scroll rounded-lg border p-4">
+			<h2 class="mb-4 font-semibold">Participants:</h2>
 			<UserProfile />
 			<UserProfile />
 			<UserProfile passed={true} />

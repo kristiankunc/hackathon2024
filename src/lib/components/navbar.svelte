@@ -2,7 +2,7 @@
 	import Sidebar from './sidebar.svelte';
 	import Button from './ui/button.svelte';
 
-	let sidebarOpen = $state(false);
+	let { sidebarOpen = $bindable(false) }: { sidebarOpen: boolean } = $props();
 </script>
 
 <header

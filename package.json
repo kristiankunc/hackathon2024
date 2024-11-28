@@ -44,7 +44,7 @@
 		"@auth/core": "^0.37.4",
 		"@auth/sveltekit": "^1.7.4",
 		"dotenv": "^16.4.5",
-		"nodemailer": "^6.9.16"
+		"nodemailer": "^6.9.16",
 		"@prisma/client": "^5.22.0"
 	}
 }

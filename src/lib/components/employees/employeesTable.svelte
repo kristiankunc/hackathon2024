@@ -8,16 +8,19 @@
 	<table class="w-full divide-y divide-background-900 overflow-hidden rounded-lg">
 		<thead class="bg-primary text-background">
 			<tr>
-				<th scope="col" class="px-6 py-3 text-left text-sm font-medium tracking-wider">Date</th>
-				<th scope="col" class="px-6 py-3 text-left text-sm font-medium tracking-wider">Name</th>
-				<th scope="col" class="px-6 py-3 text-left text-sm font-medium tracking-wider">
+				<th scope="col" class="px-6 py-3 text-left text-sm font-semibold tracking-wider">Date</th>
+				<th scope="col" class="px-6 py-3 text-left text-sm font-semibold tracking-wider">Name</th>
+				<th scope="col" class="px-6 py-3 text-left text-sm font-semibold tracking-wider">
 					Description
 				</th>
-				<th scope="col" class="px-6 py-3 text-left text-sm font-medium tracking-wider">Department</th>
-				<th scope="col" class="px-6 py-3 text-left text-sm font-medium tracking-wider">
+				<th scope="col" class="px-6 py-3 text-left text-sm font-semibold tracking-wider"
+					>Department</th
+				>
+				<th scope="col" class="px-6 py-3 text-left text-sm font-semibold tracking-wider">
 					Success Rate
 				</th>
-				<th scope="col" class="px-6 py-3 text-left text-sm font-medium tracking-wider">Actions</th>
+				<th scope="col" class="px-6 py-3 text-left text-sm font-semibold tracking-wider">Actions</th
+				>
 			</tr>
 		</thead>
 		<tbody class="divide-y divide-gray-200">

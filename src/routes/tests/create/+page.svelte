@@ -23,6 +23,19 @@
 			</div>
 
 			<div>
+				<label for="test-description" class="block text-sm font-medium text-gray-700"
+					>Test Description</label
+				>
+				<input
+					id="test-name"
+					type="text"
+					name="description"
+					placeholder="Enter test description"
+					class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+				/>
+			</div>
+
+			<div>
 				<h2 class="block text-sm font-medium text-gray-700">Test Category</h2>
 				<div class="mt-2 space-y-2">
 					<div class="flex items-center">
@@ -85,7 +98,7 @@
 					id="content"
 					rows="4"
 					placeholder="Enter content here..."
-					name="description"
+					name="content"
 					class="mt-1 block min-h-80 w-full rounded-lg border border-gray-300 p-4 text-sm placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
 				></textarea>
 			</div>

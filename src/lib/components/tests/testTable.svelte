@@ -5,7 +5,7 @@
 </script>
 
 <div class="rounded-lg border bg-background">
-	<table class="w-full divide-y rounded-lg divide-background-900 overflow-hidden">
+	<table class="w-full divide-y divide-background-900 overflow-hidden rounded-lg">
 		<thead class="bg-primary text-background">
 			<tr>
 				<th scope="col" class="px-6 py-3 text-left text-sm font-medium tracking-wider">Date</th>
@@ -27,7 +27,7 @@
 					<td class="px-6 py-4">{test.description}</td>
 					<td class="px-6 py-4">{test.successRate}%</td>
 					<td class="px-6 py-4">
-						<Button preset="skeleton">View</Button>
+						<Button preset="skeleton" href={`/tests/${test.id}`}>View</Button>
 					</td>
 				</tr>
 			{/each}

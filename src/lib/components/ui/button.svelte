@@ -8,7 +8,7 @@
 		preset = 'fill',
 		colorScheme = 'primary',
 		href = null,
-    disableDefaults = false,
+		disableDefaults = false,
 		children
 	}: {
 		additionalStyle?: string;
@@ -17,7 +17,7 @@
 		preset?: 'skeleton' | 'fill' | 'borderless';
 		colorScheme?: 'primary' | 'secondary' | 'accent' | 'background';
 		href?: string | null;
-    disableDefaults?: boolean;
+		disableDefaults?: boolean;
 		children: Snippet;
 	} = $props();
 
@@ -72,15 +72,17 @@
 </script>
 
 {#if href}
-	<a
-		{href}
-		class="{disableDefaults
-			? ''
-			: 'flex items-center justify-center gap-2 rounded-lg p-2 transition-colors'} {presets[
-			preset
-		]} {additionalStyle}"
-	>
-		{@render children?.()}
+	<a {href}>
+		<button
+			{type}
+			class="{disableDefaults
+				? ''
+				: 'flex items-center justify-center gap-2 rounded-lg p-2 transition-colors'} {presets[
+				preset
+			]} {additionalStyle}"
+		>
+			{@render children?.()}
+		</button>
 	</a>
 {:else}
 	<button

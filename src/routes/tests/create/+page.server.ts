@@ -14,33 +14,26 @@ export const actions = {
 
 		const domain = request.url.split('/').at(2);
 
-		let name = data.get('name');
-		let description = data.get('description');
+		const name = data.get('name');
+		const description = data.get('description');
+		const category = data.get('category');
+		const employeeGroup = data.get('employeeGroup');
+		const messageContent = data.get('content');
 
-		let user = locals.user;
-
-		let category = data.get('category');
-
-		let employeeGroup = data.get('employeeGroup');
-		
 		const groupId = await prisma.employeeCategory.findFirst({
 			where: {
-			  name: employeeGroup,
+				name: employeeGroup
 			},
 			select: {
-			  id: true,
-			},
-		  });
-		
+				id: true
+			}
+		});
+
 		const employees = await prisma.employee.findMany({
 			where: {
 				employeeCategoryId: groupId?.id
 			}
 		});
-
-		if (!user) {
-			return fail(400, { title: 'Not logged in' });
-		}
 
 		if (!name) {
 			return fail(400, { title: 'Name is required' });
@@ -48,6 +41,10 @@ export const actions = {
 
 		if (!description) {
 			return fail(400, { title: 'Description is required' });
+		}
+
+		if (!messageContent) {
+			return fail(400, { title: 'Message content is required' });
 		}
 
 		if (typeof name !== 'string') {
@@ -63,12 +60,13 @@ export const actions = {
 				data: {
 					name,
 					description: description,
+					messageContent: messageContent as string
 				}
 			});
 			const admin = await tx.admin.create({
 				data: {
-					email: user.email,
-					testId: test.id // Propojení s právě vytvořeným testem
+					email: locals.user!.email,
+					testId: test.id
 				}
 			});
 
@@ -82,40 +80,38 @@ export const actions = {
 					}
 				}
 			});
-
-
 		});
 
 		const sendEmail = async (email: string) => {
-				const emailData = {
-					to: email, // Recipient's email address
-					subject: name,      // Subject of the email
-					text: description // Email content
-				};
+			const emailData = {
+				to: email,
+				subject: name,
+				text: messageContent
+			};
 
-				try {
-					console.log('Sending email:', emailData);
-					const response = await fetch("http://" + domain + "/send-email", {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json'
-						},
-						body: JSON.stringify(emailData)
-					});
-			
-					if (!response.ok) {
-						throw new Error(`HTTP error! status: ${response.status}`);
-					}
-					
-					console.log('Email sent:', emailData);
-				} catch (error) {
-					console.error('Error sending email:', error);
+			try {
+				console.log('Sending email:', emailData);
+				const response = await fetch('http://' + domain + '/send-email', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify(emailData)
+				});
+
+				if (!response.ok) {
+					throw new Error(`HTTP error! status: ${response.status}`);
 				}
-		}
+
+				console.log('Email sent:', emailData);
+			} catch (error) {
+				console.error('Error sending email:', error);
+			}
+		};
 
 		console.log('Category:', category);
 
-		if (category === "email") {
+		if (category === 'email') {
 			console.log(employees);
 			for (let employee of employees) {
 				sendEmail(employee.email);

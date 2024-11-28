@@ -7,6 +7,7 @@ export const actions = {
 		const data = await request.formData();
 
 		let name = data.get('name');
+		let description = data.get('description');
 
 		let user = locals.user;
 
@@ -18,14 +19,23 @@ export const actions = {
 			return fail(400, { title: 'Name is required' });
 		}
 
+		if (!description) {
+			return fail(400, { title: 'Description is required' });
+		}
+
 		if (typeof name !== 'string') {
 			return fail(400, { title: 'Name must be a string' });
+		}
+
+		if (typeof description !== 'string') {
+			return fail(400, { title: 'Description must be a string' });
 		}
 
 		await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
 			const test = await tx.test.create({
 				data: {
-					name
+					name,
+					description
 				}
 			});
 			const admin = await tx.admin.create({

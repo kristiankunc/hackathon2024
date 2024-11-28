@@ -11,15 +11,15 @@ export const actions = {
 		let user = locals.user;
 
 		if (!user) {
-			return fail(400, { error: 'User not found' });
+			return fail(400, { title: 'Not logged in' });
 		}
 
 		if (!name) {
-			return fail(400, { name, missing: true });
+			return fail(400, { title: 'Name is required' });
 		}
 
 		if (typeof name !== 'string') {
-			return fail(400, { incorrect: true });
+			return fail(400, { title: 'Name must be a string' });
 		}
 
 		try {

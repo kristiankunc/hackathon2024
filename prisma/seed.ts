@@ -5,19 +5,19 @@ const main = async () => {
 	await prisma.employeeCategory.createMany({
 		data: [
 			{
-				name: 'IT',
+				name: 'Management',
 				description: 'IT Department'
 			},
 			{
-				name: 'HR',
+				name: 'Sales',
 				description: 'HR Department'
 			},
 			{
-				name: 'Finance',
-				description: 'Finance Department'
+				name: 'Engineering',
+				description: 'Finance Department',
 			},
 			{
-				name: 'Marketing',
+				name: 'Support',
 				description: 'Marketing Department'
 			},
 			{

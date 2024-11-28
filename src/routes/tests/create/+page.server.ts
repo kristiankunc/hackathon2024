@@ -13,16 +13,21 @@ export const actions = {
 
 		let category = data.get('category');
 		let employeeGroup = data.get('employeeGroup');
-		const groupId = await prisma.employeeCategory.findMany({
+		console.log(employeeGroup);
+		const groupId = await prisma.employeeCategory.findFirst({
 			where: {
-				name: employeeGroup
+			  name: employeeGroup,
 			},
 			select: {
-				id: true
+			  id: true,
+			},
+		  });
+		
+		const employees = await prisma.employee.findMany({
+			where: {
+				employeeCategoryId: groupId?.id
 			}
 		});
-		console.log("=====")
-		console.log(groupId);
 
 		if (!user) {
 			return fail(400, { title: 'Not logged in' });
@@ -71,8 +76,6 @@ export const actions = {
 
 		});
 
-		console.log(await prisma.employee.findMany())
-	
 
 		throw redirect(303, `/tests`);
 	}

@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import Button from './ui/button.svelte';
 
-	let { open = false }: { open: boolean } = $props();
+	let { open = $bindable(false) }: { open: boolean } = $props();
 
 	onMount(() => {
 		const nav = document.getElementById('nav');
@@ -21,24 +21,24 @@
 	id="nav"
 	class="fixed bottom-0 top-16 z-40 flex w-64 -translate-x-64 flex-col items-center gap-4 bg-background-950 py-16 shadow-md transition-transform"
 >
-	<Button preset="borderless" href="/">
+	<Button preset="borderless" colorScheme="text" href="/" click={() => (open = false)}>
 		<span class="material-symbols-outlined">person</span>
 		<h3>Account</h3>
 	</Button>
-	<Button preset="borderless" href="/">
+	<Button preset="borderless" colorScheme="text" href="/" click={() => (open = false)}>
 		<span class="material-symbols-outlined">phishing</span>
 		<h3>Phishing</h3>
 	</Button>
-	<Button preset="borderless" href="/tests">
+	<Button preset="borderless" colorScheme="text" href="/tests" click={() => (open = false)}>
 		<span class="material-symbols-outlined">labs</span>
 		<h3>Tests</h3>
 	</Button>
-	<Button preset="borderless" href="/employees">
+	<Button preset="borderless" colorScheme="text" href="/employees" click={() => (open = false)}>
 		<span class="material-symbols-outlined">badge</span>
 		<h3>Employees</h3>
 	</Button>
 	<div class="grow"></div>
-	<Button preset="borderless">
+	<Button preset="borderless" colorScheme="text" click={() => (open = false)}>
 		<span class="material-symbols-outlined">settings</span>
 		<h3>Settings</h3>
 	</Button>

@@ -5,50 +5,48 @@
 	import { page } from '$app/stores';
 
 	let { sidebarOpen = $bindable(false) }: { sidebarOpen: boolean } = $props();
+	let transparentPaths = ['/landing'];
 </script>
 
 <header
-	class="fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between bg-primary px-4 py-4 text-background shadow-md"
+	class={`fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between ${transparentPaths.includes($page.url.pathname) ? 'bg-transparent' : 'bg-background-950'} px-4 py-4 shadow`}
 >
-	<div class="flex items-center gap-4">
+	<div class="flex items-center gap-2">
 		<Button
 			click={() => {
 				sidebarOpen = !sidebarOpen;
 			}}
 			preset="borderless"
-			colorScheme="background"
+			colorScheme="text"
 		>
 			<span class="material-symbols-outlined">menu</span>
 		</Button>
 		<a class="text-lg font-bold" href="/">LOGO</a>
 	</div>
-	<nav class="flex gap-12 text-white">
-		<a href="/about" class="group transition duration-300">
+	<nav class="flex gap-12">
+		<a href="/about" class="group">
 			About
-			<span class="transition-bg block h-0.5 max-w-0 bg-white duration-500 group-hover:max-w-full"
-			></span>
+			<span class="block h-0.5 max-w-0 bg-text duration-300 group-hover:max-w-full"></span>
 		</a>
-		<a href="/services" class="group transition duration-300">
+		<a href="/services" class="group">
 			Services
-			<span class="transition-bg block h-0.5 max-w-0 bg-white duration-500 group-hover:max-w-full"
-			></span>
+			<span class="block h-0.5 max-w-0 bg-text duration-300 group-hover:max-w-full"></span>
 		</a>
-		<a href="/contact" class="group transition duration-300">
+		<a href="/contact" class="group">
 			Contact
-			<span class="transition-bg block h-0.5 max-w-0 bg-white duration-500 group-hover:max-w-full"
-			></span>
+			<span class="block h-0.5 max-w-0 bg-text duration-300 group-hover:max-w-full"></span>
 		</a>
 	</nav>
 
 	<div class="flex flex-row items-center justify-center">
 		{#if $page.data.user}
-			<span class="mr-4">{$page.data.user.name}</span>
-			<Button click={() => signOut()} additionalStyle="text-background">
-				<span class="material-symbols-outlined">person</span>
+			<span class="material-symbols-outlined mr-1">person</span>
+			<span class="mr-4 text-sm font-semibold">{$page.data.user.name}</span>
+			<Button click={() => signOut()} colorScheme="secondary">
 				<span>Sign out</span>
 			</Button>
 		{:else}
-			<Button click={() => signIn('google')} preset="borderless" colorScheme="background">
+			<Button click={() => signIn('google')} preset="borderless" colorScheme="text">
 				<span class="material-symbols-outlined">person</span>
 				<span>Sign in</span>
 			</Button>
@@ -57,4 +55,4 @@
 </header>
 <div class="h-16"></div>
 
-<Sidebar open={sidebarOpen} />
+<Sidebar bind:open={sidebarOpen} />

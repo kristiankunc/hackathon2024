@@ -7,6 +7,7 @@
 		type = 'submit',
 		preset = 'fill',
 		colorScheme = 'primary',
+		href = null,
 		children
 	}: {
 		additionalStyle?: string;
@@ -14,6 +15,7 @@
 		type?: 'submit' | 'button' | 'reset' | null | undefined;
 		preset?: 'skeleton' | 'fill' | 'borderless';
 		colorScheme?: 'primary' | 'secondary' | 'accent' | 'background';
+		href?: string | null;
 		children: Snippet;
 	} = $props();
 
@@ -22,13 +24,13 @@
 			c1: 'primary',
 			c2: 'background',
 			c3: 'primary-900',
-      c4: 'primary-900'
+			c4: 'primary-900'
 		},
 		secondary: {
 			c1: 'secondary',
 			c2: 'background',
 			c3: 'secondary-900',
-      c4: 'secondary-900'
+			c4: 'secondary-900'
 		},
 		accent: {
 			c1: 'accent',
@@ -67,16 +69,26 @@
 	};
 </script>
 
-<button
-	{type}
-	onclick={() => click()}
-	id="button"
-	class="flex items-center justify-center gap-2 rounded-lg p-2 transition-colors {presets[
-		preset
-	]} {additionalStyle}"
->
-	{@render children?.()}
-</button>
+{#if href}
+	<a
+		{href}
+		class="flex items-center justify-center gap-2 rounded-lg p-2 transition-colors {presets[
+			preset
+		]} {additionalStyle}"
+	>
+		{@render children?.()}
+	</a>
+{:else}
+	<button
+		{type}
+		onclick={() => click()}
+		class="flex items-center justify-center gap-2 rounded-lg p-2 transition-colors {presets[
+			preset
+		]} {additionalStyle}"
+	>
+		{@render children?.()}
+	</button>
+{/if}
 
 <!-- DONT DELETE THESE DIVs - it makes tailwind include required classes -->
 <div class="hidden border-accent bg-accent text-accent hover:bg-accent hover:text-accent"></div>

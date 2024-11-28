@@ -1,6 +1,7 @@
 <script lang="ts">
-	let selectedCategory = 'email';
-	let selectedGroup = '';
+	let selectedCategory = $state('');
+	let selectedGroup = $state('');
+	let messageContent = $state('');
 </script>
 
 <div class="px-8 py-4">
@@ -95,6 +96,7 @@
 			<div>
 				<label for="content" class="block text-sm font-medium text-gray-700">Edit content</label>
 				<textarea
+					bind:value={messageContent}
 					id="content"
 					rows="4"
 					placeholder="Enter content here..."
@@ -113,4 +115,15 @@
 			</div>
 		</form>
 	</section>
+
+	{#if selectedCategory === 'email'}
+		<div>
+			<h2 class="mt-6 text-xl font-bold text-gray-800">HTML preview</h2>
+			<iframe
+				srcdoc={messageContent}
+				title="HTML preview"
+				class="h-80 w-full border border-gray-300"
+			></iframe>
+		</div>
+	{/if}
 </div>

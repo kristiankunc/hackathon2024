@@ -39,7 +39,7 @@
 <Sidebar.Root>
 	<Sidebar.Content>
 		<Sidebar.Group>
-			<Sidebar.GroupLabel>Application</Sidebar.GroupLabel>
+      <div class="h-8"></div>
 			<Sidebar.GroupContent>
 				<Sidebar.Menu>
 					{#each items as item (item.title)}

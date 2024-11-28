@@ -2,8 +2,7 @@
   import { Button } from "$lib/components/ui/button/index.js";
 </script>
 
-<header class="bg-primary text-white shadow-md">
-  <div class="container mx-auto flex justify-between items-center py-4 mb-4">
+<header class="bg-primary text-background shadow-md flex py-4 px-4 justify-between items-center">
     <div class="text-lg font-bold">
       <a href="/">LOGO</a>
     </div>
@@ -24,5 +23,4 @@
     <Button class="bg-white text-text border border-white hover:bg-primary hover:text-white hover:border font-bold py-2 px-4 rounded-lg">
       Sign In
     </Button>
-  </div>
 </header>

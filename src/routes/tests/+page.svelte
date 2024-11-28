@@ -1,32 +1,7 @@
 <script lang="ts">
-	import TestTable from '$lib/components/testTable.svelte';
+	import TestTable from '$lib/components/tests/testTable.svelte';
 
 	let { data } = $props();
-	// let data = {
-	// 	tests: [
-	// 		{
-	// 			id: 1,
-	// 			date: '2021-10-01',
-	// 			name: 'Test 1',
-	// 			description: 'This is a test',
-	// 			successRate: '100%'
-	// 		},
-	// 		{
-	// 			id: 2,
-	// 			date: '2021-10-02',
-	// 			name: 'Test 2',
-	// 			description: 'This is a test',
-	// 			successRate: '100%'
-	// 		},
-	// 		{
-	// 			id: 3,
-	// 			date: '2021-10-03',
-	// 			name: 'Test 3',
-	// 			description: 'This is a test',
-	// 			successRate: '100%'
-	// 		}
-	// 	]
-	// };
 </script>
 
 <div class="px-8 py-4">

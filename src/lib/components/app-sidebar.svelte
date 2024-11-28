@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Calendar from 'lucide-svelte/icons/calendar';
 	import House from 'lucide-svelte/icons/house';
 	import Inbox from 'lucide-svelte/icons/inbox';
 	import Search from 'lucide-svelte/icons/search';
 	import Settings from 'lucide-svelte/icons/settings';
 	import Logout from 'lucide-svelte/icons/log-out';
-	import User from 'lucide-svelte/icons/user';
+	import Fish from 'lucide-svelte/icons/fish';
+	import UserList from 'lucide-svelte/icons/book-user';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import * as Avatar from '$lib/components/ui/avatar/index.js';
 
@@ -17,14 +17,14 @@
 			icon: House
 		},
 		{
-			title: 'Inbox',
+			title: 'Phishing',
 			url: '#',
-			icon: Inbox
+			icon: Fish
 		},
 		{
-			title: 'Calendar',
+			title: 'Lists',
 			url: '#',
-			icon: Calendar
+			icon: UserList
 		},
 		{
 			title: 'Search',

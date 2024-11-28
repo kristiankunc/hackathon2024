@@ -18,7 +18,7 @@
 	const keyColors = ['#cf7d6d', '#51c6aa'];
 </script>
 
-<div class="w-full p-4">
+<div class="w-full p-8">
 	<h1 class="text-2xl font-semibold">Test results</h1>
 	<h3 class="text-sm">Performed {date.getDate()}. {date.getMonth()}. {date.getFullYear()}</h3>
 	<div class="mt-4 grid w-full grid-cols-2 gap-4">

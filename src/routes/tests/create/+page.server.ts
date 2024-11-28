@@ -20,20 +20,7 @@ export const actions = {
 		const employeeGroup = data.get('employeeGroup');
 		const messageContent = data.get('content');
 
-		const groupId = await prisma.employeeCategory.findFirst({
-			where: {
-				name: employeeGroup
-			},
-			select: {
-				id: true
-			}
-		});
-
-		const employees = await prisma.employee.findMany({
-			where: {
-				employeeCategoryId: groupId?.id
-			}
-		});
+		console.log(messageContent);
 
 		if (!name) {
 			return fail(400, { title: 'Name is required' });
@@ -55,6 +42,21 @@ export const actions = {
 			return fail(400, { title: 'Description must be a string' });
 		}
 
+		const groupId = await prisma.employeeCategory.findFirst({
+			where: {
+				name: employeeGroup
+			},
+			select: {
+				id: true
+			}
+		});
+
+		const employees = await prisma.employee.findMany({
+			where: {
+				employeeCategoryId: groupId?.id
+			}
+		});
+
 		await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
 			console.log('Creating test:', name, description, messageContent);
 			const test = await tx.test.create({
@@ -67,6 +69,7 @@ export const actions = {
 					}
 				}
 			});
+
 			const admin = await tx.admin.create({
 				data: {
 					email: locals.user!.email,

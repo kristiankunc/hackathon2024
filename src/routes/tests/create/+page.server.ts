@@ -58,11 +58,15 @@ export const actions = {
 		});
 
 		await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
+			console.log('Creating test:', name, description, messageContent);
 			const test = await tx.test.create({
 				data: {
 					name,
-					description,
-					messageContent: messageContent as string
+					description: description,
+					messageContent: messageContent as string,
+					employees: {
+						connect: employees.map((employee: Employee) => ({ id: employee.id }))
+					}
 				}
 			});
 
@@ -112,22 +116,11 @@ export const actions = {
 			}
 		};
 
-		console.log('Category:', category);
-
 		if (category === 'email') {
 			console.log(employees);
 			for (let employee of employees) {
 				sendEmail(employee.email);
 			}
-			await prisma.test.create({
-				data: {
-					name,
-					description,
-					employees: {
-						connect: employees.map((employee: Employee) => ({ id: employee.id }))
-					}
-				}
-			});
 		} else if (category === 'sms') {
 			console.log('Sending SMS');
 		} else if (category === 'telephone') {
@@ -135,6 +128,7 @@ export const actions = {
 		} else {
 			console.log('Unknown category');
 		}
+		console.log('Category:', category);
 
 		throw redirect(303, `/tests`);
 	}

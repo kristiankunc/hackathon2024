@@ -127,8 +127,8 @@
 					class="mt-1 block rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
 				>
 					<option value="" disabled selected>Choose a group</option>
-					<option value="management">Management</option>
-					<option value="engineering">Engineering</option>
+					<option value="management">IT</option>
+					<option value="engineering">HR</option>
 					<option value="sales">Sales</option>
 					<option value="support">Support</option>
 				</select>
@@ -143,6 +143,7 @@
 					placeholder="Enter content here..."
 					name="content"
 					class="mt-1 block min-h-80 w-full rounded-lg border border-gray-300 p-4 text-sm placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
+					required
 				></textarea>
 			</div> -->
 

@@ -11,7 +11,7 @@ model Test {
     id             Int        @id @default(autoincrement())
     name           String
     description    String
-    messageContent String
+    messageContent String?     @db.LongText
     admins         Admin[]
     employees      Employee[]
     logs           Log[]

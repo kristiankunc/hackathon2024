@@ -9,7 +9,7 @@ const main = async () => {
 		data: {
 			name: 'Test with logs',
 			description: 'test that includes a few logs',
-			messageContent: ''
+			messageContent: 'This is a test message'
 		}
 	});
 

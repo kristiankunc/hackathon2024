@@ -2,6 +2,47 @@
 	let selectedCategory = $state('');
 	let selectedGroup = $state('');
 	let messageContent = $state('');
+
+	let htmlContent = $state(`<h1>Hello, world!</h1>\n<p>Edit the HTML in the textarea below.</p>`);
+	let lineNumbers: number[] = $state([]);
+
+	// Update line numbers based on the number of lines in the content
+	const updateLineNumbers = () => {
+		lineNumbers = htmlContent.split('\n').map((_, i) => i + 1);
+	};
+
+	// Initialize line numbers
+	updateLineNumbers();
+
+	// Handle `Tab` key for indentation in the textarea
+	const handleKeyDown = (e: KeyboardEvent) => {
+		if (e.key === 'Tab') {
+			e.preventDefault();
+
+			const textarea = e.target;
+			if (!(textarea instanceof HTMLTextAreaElement)) return;
+
+			const start = textarea.selectionStart;
+			const end = textarea.selectionEnd;
+
+			// Insert indentation (2 spaces or \t for tabs)
+			const indent = '  '; // Use '\t' for actual tabs
+			const before = htmlContent.substring(0, start);
+			const after = htmlContent.substring(end);
+
+			// Temporarily disable reactivity for cursor handling
+			htmlContent = before + indent + after;
+
+			// Defer cursor position restoration to next tick
+			requestAnimationFrame(() => {
+				textarea.setSelectionRange(start + indent.length, start + indent.length);
+				textarea.focus();
+			});
+
+			// Update line numbers
+			updateLineNumbers();
+		}
+	};
 </script>
 
 <div class="px-8 py-4">
@@ -93,7 +134,7 @@
 				</select>
 			</div>
 
-			<div>
+			<!-- <div>
 				<label for="content" class="block text-sm font-medium text-gray-700">Edit content</label>
 				<textarea
 					bind:value={messageContent}
@@ -104,6 +145,26 @@
 					class="mt-1 block min-h-80 w-full rounded-lg border border-gray-300 p-4 text-sm placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
 					required
 				></textarea>
+			</div> -->
+
+			<div class="relative w-full md:w-1/2">
+				<label for="html-editor" class="mb-2 block text-lg font-medium">HTML Editor</label>
+				<div class="flex">
+					<!-- Line Numbers -->
+					<div class="bg-gray-100 px-2 py-4 text-center leading-5 text-gray-500">
+						{#each lineNumbers as line}
+							<div>{line}</div>
+						{/each}
+					</div>
+					<!-- Textarea -->
+					<textarea
+						id="html-editor"
+						bind:value={htmlContent}
+						onkeydown={handleKeyDown}
+						class="h-64 w-full resize-none rounded-r-lg border-l border-gray-300 bg-gray-50 p-4 font-mono text-sm leading-5 focus:ring focus:ring-blue-300"
+						oninput={updateLineNumbers}
+					></textarea>
+				</div>
 			</div>
 
 			<div class="flex justify-end">
@@ -120,10 +181,7 @@
 	{#if selectedCategory === 'email'}
 		<div>
 			<h2 class="mt-6 text-xl font-bold text-gray-800">HTML preview</h2>
-			<iframe
-				srcdoc={messageContent}
-				title="HTML preview"
-				class="h-80 w-full border border-gray-300"
+			<iframe srcdoc={htmlContent} title="HTML preview" class="h-80 w-full border border-gray-300"
 			></iframe>
 		</div>
 	{/if}

@@ -1,12 +1,23 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { Button } from '$lib/components/ui/button/index.js';
-	import { signIn, signOut } from '@auth/sveltekit/client';
+	import Sidebar from './sidebar.svelte';
+	import Button from './ui/button.svelte';
+
+	let sidebarOpen = $state(false);
 </script>
 
-<header class="flex items-center justify-between bg-primary px-4 py-4 text-background shadow-md">
-	<div class="text-lg font-bold">
-		<a href="/">LOGO</a>
+<header
+	class="bg-primary text-background fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between px-4 py-4 shadow-md"
+>
+	<div class="flex items-center gap-4">
+		<Button
+			style="flex items-center"
+			click={() => {
+				sidebarOpen = !sidebarOpen;
+			}}
+		>
+			<span class="material-symbols-outlined">menu</span>
+		</Button>
+		<a class="text-lg font-bold" href="/">LOGO</a>
 	</div>
 	<nav class="flex gap-12 text-white">
 		<a href="/about" class="group transition duration-300">
@@ -25,22 +36,17 @@
 			></span>
 		</a>
 	</nav>
-	{#if $page.data.user}
-		<div class="flex items-center gap-4">
-			<span>{$page.data.user.name}</span>
-			<Button
-				class="rounded-lg border border-white bg-white px-4 py-2 font-bold text-text hover:border hover:bg-primary hover:text-white"
-				onclick={() => signOut()}
-			>
-				Sign Out
-			</Button>
-		</div>
-	{:else}
-		<Button
-			class="rounded-lg border border-white bg-white px-4 py-2 font-bold text-text hover:border hover:bg-primary hover:text-white"
-			onclick={() => signIn('google')}
-		>
-			Sign In
-		</Button>
-	{/if}
+
+	<Button
+		click={() => {
+			sidebarOpen = !sidebarOpen;
+		}}
+		additionalStyle="text-background"
+	>
+		<span class="material-symbols-outlined">person</span>
+		<span>Sign in</span>
+	</Button>
 </header>
+<div class="h-16"></div>
+
+<Sidebar open={sidebarOpen} />

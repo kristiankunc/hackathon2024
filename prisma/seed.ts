@@ -8,7 +8,8 @@ const main = async () => {
 	const test = await prisma.test.create({
 		data: {
 			name: 'Test with logs',
-			description: 'test that includes a few logs'
+			description: 'test that includes a few logs',
+			messageContent: ''
 		}
 	});
 

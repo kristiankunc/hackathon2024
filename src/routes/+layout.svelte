@@ -1,15 +1,19 @@
 <script lang="ts">
 	import Navbar from '$lib/components/navbar.svelte';
-import '../app.css';
+	import '../app.css';
+	import * as Sidebar from "$lib/components/ui/sidebar/index.js";
+  	import AppSidebar from "$lib/components/app-sidebar.svelte";
+  
 	let { children } = $props();
 </script>
 
-<svelte:head>
-	<link
-		rel="stylesheet"
-		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-	/>
-</svelte:head>
+<Sidebar.Provider>
+	<AppSidebar />
+	<main>
+	  <Sidebar.Trigger />
+	  {@render children?.()}
+	</main>
+</Sidebar.Provider>
 
 <Navbar />
 {@render children()}

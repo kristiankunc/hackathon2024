@@ -1,0 +1,48 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model Test {
+    id        Int        @id @default(autoincrement())
+    name      String
+    admins    Admin[]
+    employees Employee[]
+    Log       Log[]
+}
+
+model Admin {
+    id     Int    @id @default(autoincrement())
+    email  String
+    Test   Test   @relation(fields: [testId], references: [id])
+    testId Int
+}
+
+model Employee {
+    id        Int    @id @default(autoincrement())
+    firstName String
+    lastName  String
+    email     String
+    Tests     Test[]
+    Log       Log[]
+}
+
+model Log {
+    id         Int       @id @default(autoincrement())
+    action     LogAction
+    createdAt  DateTime
+    test       Test      @relation(fields: [testId], references: [id])
+    employee   Employee  @relation(fields: [employeeId], references: [id])
+    testId     Int
+    employeeId Int
+}
+
+enum LogAction {
+    SENT
+    READ
+    CLICKED
+}

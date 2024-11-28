@@ -1,7 +1,11 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
-  content: ['./src/**/*.{html,js,svelte,ts}'],
+  content: [
+    './src/**/*.{html,js,svelte,ts}',
+    './node_modules/svelte-ux/**/*.{svelte,js}',
+    './node_modules/layerchart/**/*.{svelte,js}'
+  ],
   theme: {
     extend: {
       colors: {

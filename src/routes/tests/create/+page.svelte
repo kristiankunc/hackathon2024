@@ -1,5 +1,6 @@
 <script lang="ts">
 	let selectedCategory = 'email';
+	let selectedGroup = '';
 </script>
 
 <div class="px-8 py-4">
@@ -11,8 +12,9 @@
 	<section class="rounded bg-white p-6 shadow">
 		<form class="space-y-6" method="POST" action="?/createTest">
 			<div>
-				<label class="block text-sm font-medium text-gray-700">Test Name</label>
+				<label for="test-name" class="block text-sm font-medium text-gray-700">Test Name</label>
 				<input
+					id="test-name"
 					type="text"
 					name="name"
 					placeholder="Enter test name"
@@ -21,7 +23,7 @@
 			</div>
 
 			<div>
-				<label class="block text-sm font-medium text-gray-700">Test Category</label>
+				<h2 class="block text-sm font-medium text-gray-700">Test Category</h2>
 				<div class="mt-2 space-y-2">
 					<div class="flex items-center">
 						<input
@@ -60,20 +62,31 @@
 			</div>
 
 			<div>
-				<label class="block text-sm font-medium text-gray-700">Employees</label>
-				<div class="mt-1 flex space-x-2">
-					<input
-						type="text"
-						placeholder="Add employee"
-						class="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-					/>
-					<button
-						type="button"
-						class="rounded bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700"
-					>
-						Add
-					</button>
-				</div>
+				<label for="employee-group" class="block text-sm font-medium text-gray-700"
+					>Employee Group</label
+				>
+				<select
+					id="employee-group"
+					name="employeeGroup"
+					bind:value={selectedGroup}
+					class="mt-1 block rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+				>
+					<option value="" disabled selected>Choose a group</option>
+					<option value="management">Management</option>
+					<option value="engineering">Engineering</option>
+					<option value="sales">Sales</option>
+					<option value="support">Support</option>
+				</select>
+			</div>
+
+			<div>
+				<label for="content" class="block text-sm font-medium text-gray-700">Edit content</label>
+				<textarea
+					id="content"
+					rows="4"
+					placeholder="Enter content here..."
+					class="mt-1 block min-h-48 w-full rounded-lg border border-gray-300 p-4 text-sm placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
+				></textarea>
 			</div>
 
 			<div class="flex justify-end">

@@ -23,7 +23,7 @@
 				<Table.Cell>{test.description}</Table.Cell>
 				<Table.Cell>{test.successRate}</Table.Cell>
 				<Table.Cell>
-					<a href={`/tests/${test.id}`}><Button class="text-white">View</Button></a>
+					<a href={`/tests/${test.id}`}><Button>View</Button></a>
 				</Table.Cell>
 			</Table.Row>
 		{/each}

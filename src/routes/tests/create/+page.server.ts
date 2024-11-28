@@ -3,7 +3,7 @@ import { prisma } from '$lib/prisma';
 import type { Prisma } from '@prisma/client';
 
 export const actions = {
-	default: async ({ request, locals }) => {
+	createTest: async ({ request, locals }) => {
 		const data = await request.formData();
 
 		let name = data.get('name');
@@ -21,37 +21,31 @@ export const actions = {
 			return fail(400, { title: 'Name must be a string' });
 		}
 
-		try {
-			await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
-				const test = await tx.test.create({
-					data: {
-						name
-					}
-				});
-
-				const admin = await tx.admin.create({
-					data: {
-						email: user.email,
-						testId: test.id // Propojení s právě vytvořeným testem
-					}
-				});
-
-				await tx.test.update({
-					where: {
-						id: test.id
-					},
-					data: {
-						admins: {
-							connect: { id: admin.id }
-						}
-					}
-				});
+		await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
+			const test = await tx.test.create({
+				data: {
+					name
+				}
+			});
+			const admin = await tx.admin.create({
+				data: {
+					email: user.email,
+					testId: test.id // Propojení s právě vytvořeným testem
+				}
 			});
 
-			throw redirect(303, `/tests`);
-		} catch (error) {
-			console.error(error);
-			return fail(500, { error: 'Error while creating test and admin.' });
-		}
+			await tx.test.update({
+				where: {
+					id: test.id
+				},
+				data: {
+					admins: {
+						connect: { id: admin.id }
+					}
+				}
+			});
+		});
+
+		throw redirect(303, `/tests`);
 	}
 } satisfies Actions;

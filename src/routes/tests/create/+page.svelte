@@ -4,9 +4,10 @@
 <main>
 	<h1>Vytvořit nový test</h1>
 
-	<form>
+	<form method="POST" action="?/createTest">
 		<label for="name">Název testu:</label>
-		<input id="name" type="text" required />
+		<input name="name" type="text" required />
+
 		<button type="submit">Vytvořit test</button>
 	</form>
 </main>

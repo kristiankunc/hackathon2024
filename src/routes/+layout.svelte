@@ -1,20 +1,18 @@
 <script lang="ts">
 	import Navbar from '$lib/components/navbar.svelte';
+	import Sidebar from '$lib/components/sidebar.svelte';
 	import '../app.css';
-	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
-	import AppSidebar from '$lib/components/app-sidebar.svelte';
-	import { page } from '$app/stores';
-
-	console.log($page.form);
 
 	let { children } = $props();
+	let sidebarOpen = $state(false);
 </script>
 
-<Sidebar.Provider>
-	<AppSidebar />
-	<main class="w-full">
-		<Navbar />
-		<Sidebar.Trigger class="m-2" />
-		{@render children?.()}
-	</main>
-</Sidebar.Provider>
+<svelte:head>
+	<link
+		rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+	/>
+</svelte:head>
+
+<Navbar bind:sidebarOpen />
+<div class="transition-[margin-left] {sidebarOpen ? 'ml-64' : 'ml-0'}">{@render children?.()}</div>

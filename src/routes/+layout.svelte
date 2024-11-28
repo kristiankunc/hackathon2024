@@ -1,13 +1,12 @@
 <script lang="ts">
 	import Navbar from '$lib/components/navbar.svelte';
 	import '../app.css';
-	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
-	import AppSidebar from '$lib/components/app-sidebar.svelte';
 
 	let { children } = $props();
 </script>
 
 <Navbar />
+<<<<<<< HEAD
 <Sidebar.Provider>
 	<AppSidebar />
 	<main class="w-full">
@@ -16,3 +15,6 @@
 		{@render children?.()}
 	</main>
 </Sidebar.Provider>
+=======
+{@render children?.()}
+>>>>>>> 4efdb70dabc49f98c40b8ff1b7c05ce8f0473f32

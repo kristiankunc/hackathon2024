@@ -5,7 +5,7 @@
 	let { data } = $props();
 </script>
 
-<div class="px-8 py-4">
+<div class="p-8 ">
 	<Button
 		href="/employees/create"
 		disableDefaults={true}

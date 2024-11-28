@@ -15,7 +15,7 @@
 		}
 	];
 
-	const keyColors = ['#435fcb', '#d873d0'];
+	const keyColors = ['#cf7d6d', '#51c6aa'];
 </script>
 
 <div class="w-full p-4">
@@ -25,9 +25,9 @@
 		<div class="flex h-fit items-center bg-background-950 shadow rounded-lg border p-4">
 			<div class="w-1/3 text-center">
 				<h3 class="text-xl font-semibold">Risky behaviour:</h3>
-				<h2 class="text-4xl font-bold text-accent">{data[1].value}%</h2>
+				<h2 class="text-4xl font-bold text-[#cf7d6d]">{data[1].value}%</h2>
 				<h3 class="mt-8 font-semibold">Safe behaviour:</h3>
-				<h2 class="text-3xl font-bold text-primary">{data[0].value}%</h2>
+				<h2 class="text-3xl font-bold text-[#51c6aa]">{data[0].value}%</h2>
 			</div>
 			<div class="h-72 grow p-4">
 				<Chart {data} x="value" c="color" cRange={keyColors}>

@@ -15,7 +15,7 @@
 		click?: Function;
 		type?: 'submit' | 'button' | 'reset' | null | undefined;
 		preset?: 'skeleton' | 'fill' | 'borderless';
-		colorScheme?: 'primary' | 'secondary' | 'accent' | 'background';
+		colorScheme?: 'primary' | 'secondary' | 'accent' | 'background' | 'text';
 		href?: string | null;
 		disableDefaults?: boolean;
 		children: Snippet;
@@ -45,6 +45,12 @@
 			c2: 'primary',
 			c3: 'background-900',
 			c4: 'background-600'
+		},
+		text: {
+			c1: 'text',
+			c2: 'background',
+			c3: 'background-900',
+			c4: 'background-900'
 		}
 	};
 
@@ -75,6 +81,7 @@
 	<a {href}>
 		<button
 			{type}
+			onclick={() => click()}
 			class="{disableDefaults
 				? ''
 				: 'flex items-center justify-center gap-2 rounded-lg p-2 transition-colors'} {presets[
@@ -109,6 +116,7 @@
 <div
 	class="hidden border-background bg-background text-background hover:bg-background hover:text-background"
 ></div>
+<div class="hidden border-text bg-text text-text hover:bg-text hover:text-text"></div>
 <div class="hidden hover:bg-primary-900"></div>
 <div class="hidden hover:bg-secondary-900"></div>
 <div class="hidden hover:bg-accent-900"></div>

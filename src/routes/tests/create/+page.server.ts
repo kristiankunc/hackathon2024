@@ -1,7 +1,12 @@
 import { fail, redirect, type Actions } from '@sveltejs/kit';
 import { prisma } from '$lib/prisma';
 import type { Prisma } from '@prisma/client';
-import { base } from '$app/paths';
+
+interface Employee {
+	id: number;
+	email: string;
+	employeeCategoryId: number;
+}
 
 export const actions = {
 	createTest: async ({ request, locals }) => {
@@ -115,6 +120,15 @@ export const actions = {
 			for (let employee of employees) {
 				sendEmail(employee.email);
 			}
+			await prisma.test.create({
+				data: {
+					name,
+					description,
+					employees: {
+						connect: employees.map((employee: Employee) => ({ id: employee.id }))
+					}
+				}
+			});
 		}
 		else if (category === "sms") {
 			console.log("Sending SMS");

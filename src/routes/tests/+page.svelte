@@ -9,7 +9,7 @@
 	<Button
 		href="/tests/create"
 		disableDefaults={true}
-		additionalStyle="rounded-full transition-colors p-2 w-16 h-16 fixed bottom-16 right-16 flex justify-center items-center"
+		additionalStyle="rounded-full transition-colors p-2 w-16 h-16 fixed bottom-12 right-12 flex justify-center items-center"
 	>
 		<span class="material-symbols-outlined">add</span>
 	</Button>

@@ -75,6 +75,7 @@
 	<a {href}>
 		<button
 			{type}
+			onclick={() => click()}
 			class="{disableDefaults
 				? ''
 				: 'flex items-center justify-center gap-2 rounded-lg p-2 transition-colors'} {presets[

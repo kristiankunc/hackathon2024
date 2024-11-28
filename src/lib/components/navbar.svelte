@@ -57,4 +57,4 @@
 </header>
 <div class="h-16"></div>
 
-<Sidebar open={sidebarOpen} />
+<Sidebar bind:open={sidebarOpen} />

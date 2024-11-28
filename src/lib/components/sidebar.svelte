@@ -19,7 +19,7 @@
 
 <div
 	id="nav"
-	class="bg-background-950 fixed flex gap-4 top-16 bottom-0 w-64 -translate-x-64 flex-col items-center py-16 shadow-md transition-transform"
+	class="bg-background-950 z-40 fixed flex gap-4 top-16 bottom-0 w-64 -translate-x-64 flex-col items-center py-16 shadow-md transition-transform"
 >
 	<Button style="flex gap-2">
 		<span class="material-symbols-outlined">person</span>

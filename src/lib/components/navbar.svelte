@@ -5,7 +5,9 @@
 	let sidebarOpen = $state(false);
 </script>
 
-<header class="bg-primary text-background flex items-center justify-between px-4 py-4 shadow-md">
+<header
+	class="bg-primary text-background fixed left-0 right-0 top-0 z-50 flex h-16 items-center justify-between px-4 py-4 shadow-md"
+>
 	<div class="flex items-center gap-4">
 		<Button
 			style="flex items-center"
@@ -39,11 +41,12 @@
 		click={() => {
 			sidebarOpen = !sidebarOpen;
 		}}
-    additionalStyle="text-background"
+		additionalStyle="text-background"
 	>
 		<span class="material-symbols-outlined">person</span>
-    <span>Sign in</span>
+		<span>Sign in</span>
 	</Button>
 </header>
+<div class="h-16"></div>
 
 <Sidebar open={sidebarOpen} />

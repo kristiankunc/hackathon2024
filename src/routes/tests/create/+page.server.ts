@@ -11,11 +11,10 @@ export const actions = {
 
 		let user = locals.user;
 
-		let emailText = data.get('emailText');
-
 		let category = data.get('category');
+
 		let employeeGroup = data.get('employeeGroup');
-		console.log(employeeGroup);
+		
 		const groupId = await prisma.employeeCategory.findFirst({
 			where: {
 			  name: employeeGroup,
@@ -55,7 +54,7 @@ export const actions = {
 			const test = await tx.test.create({
 				data: {
 					name,
-					description
+					description: description,
 				}
 			});
 			const admin = await tx.admin.create({
@@ -78,16 +77,16 @@ export const actions = {
 
 		});
 
-		const sendEmail = async () => {
-			for (let employee of employees) {
+		const sendEmail = async (email: string) => {
 				const emailData = {
-					to: employee.email, // Recipient's email address
+					to: email, // Recipient's email address
 					subject: name,      // Subject of the email
-					text: emailText // Email content
+					text: description // Email content
 				};
 
 				try {
-					const response = await fetch("https://localhost:5173/send-email", {
+					console.log('Sending email:', emailData);
+					const response = await fetch("/send-email", {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json'
@@ -104,11 +103,26 @@ export const actions = {
 				} catch (error) {
 					console.error('Error sending email:', error);
 				}
-			}
+				console.log('Email sent');
 		}
 
+		console.log('Category:', category);
 
-		sendEmail();
+		if (category === "email") {
+			console.log(employees);
+			for (let employee of employees) {
+				sendEmail(employee.email);
+			}
+		}
+		else if (category === "sms") {
+			console.log("Sending SMS");
+		}
+		else if (category === "telephone") {
+			console.log("Calling");
+		}
+		else {
+			console.log("Unknown category");
+		}
 
 		throw redirect(303, `/tests`);
 	}

@@ -1,6 +1,7 @@
 <script lang="ts">
-	let selectedCategory = 'email';
-	let selectedGroup = '';
+	let selectedCategory = $state('');
+	let selectedGroup = $state('');
+	let messageContent = $state('');
 </script>
 
 <div class="px-8 py-4">
@@ -18,6 +19,19 @@
 					type="text"
 					name="name"
 					placeholder="Enter test name"
+					class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+				/>
+			</div>
+
+			<div>
+				<label for="test-description" class="block text-sm font-medium text-gray-700"
+					>Test Description</label
+				>
+				<input
+					id="test-name"
+					type="text"
+					name="description"
+					placeholder="Enter test description"
 					class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
 				/>
 			</div>
@@ -82,10 +96,11 @@
 			<div>
 				<label for="content" class="block text-sm font-medium text-gray-700">Edit content</label>
 				<textarea
+					bind:value={messageContent}
 					id="content"
 					rows="4"
 					placeholder="Enter content here..."
-					name="description"
+					name="content"
 					class="mt-1 block min-h-80 w-full rounded-lg border border-gray-300 p-4 text-sm placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
 				></textarea>
 			</div>
@@ -100,4 +115,15 @@
 			</div>
 		</form>
 	</section>
+
+	{#if selectedCategory === 'email'}
+		<div>
+			<h2 class="mt-6 text-xl font-bold text-gray-800">HTML preview</h2>
+			<iframe
+				srcdoc={messageContent}
+				title="HTML preview"
+				class="h-80 w-full border border-gray-300"
+			></iframe>
+		</div>
+	{/if}
 </div>

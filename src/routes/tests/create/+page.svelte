@@ -60,42 +60,42 @@
 	};
 </script>
 
-<div class="px-8 py-4">
-	<div class="mb-6">
-		<h1 class="text-2xl font-bold text-gray-800">Create a New Test</h1>
-		<p class="text-gray-600">Fill out the form below to create a new test.</p>
+<div class="p-8">
+	<div class="mb-8">
+		<h1 class="text-2xl font-semibold">Create a New Test</h1>
+		<p class="text-primary">Fill out the form below to create a new test.</p>
 	</div>
 
-	<section class="rounded bg-white p-6 shadow">
+	<section class="rounded-lg bg-background-950 p-6 shadow">
 		<form class="space-y-6" method="POST" action="?/createTest">
 			<div>
-				<label for="test-name" class="block text-sm font-medium text-gray-700">Test Name</label>
+				<label for="test-name" class="primary block text-sm font-semibold">Test Name</label>
 				<input
 					id="test-name"
 					type="text"
 					name="name"
 					placeholder="Enter test name"
-					class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+					class="mt-1 w-full rounded-lg border bg-background px-4 py-2 outline-none"
 					required
 				/>
 			</div>
 
 			<div>
-				<label for="test-description" class="block text-sm font-medium text-gray-700"
+				<label for="test-description" class="primary block text-sm font-semibold"
 					>Test Description</label
 				>
 				<input
-					id="test-name"
+					id="test-description"
 					type="text"
 					name="description"
 					placeholder="Enter test description"
-					class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+					class="mt-1 w-full rounded-lg border bg-background px-4 py-2 outline-none"
 					required
 				/>
 			</div>
 
 			<div>
-				<h2 class="block text-sm font-medium text-gray-700">Test Category</h2>
+				<h2 class="primary block text-sm font-semibold">Test Category</h2>
 				<div class="mt-2 space-y-2">
 					<div class="flex items-center">
 						<input
@@ -104,10 +104,10 @@
 							name="category"
 							value="email"
 							bind:group={selectedCategory}
-							class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500"
+							class="h-4 w-4 border text-accent outline-none"
 							checked
 						/>
-						<label for="category-email" class="ml-2 text-sm text-gray-700">Email</label>
+						<label for="category-email" class="ml-2 text-sm">Email</label>
 					</div>
 					<div class="flex items-center">
 						<input
@@ -116,9 +116,9 @@
 							name="category"
 							value="sms"
 							bind:group={selectedCategory}
-							class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500"
+							class="h-4 w-4 border text-accent outline-none"
 						/>
-						<label for="category-sms" class="ml-2 text-sm text-gray-700">SMS</label>
+						<label for="category-sms" class="ml-2 text-sm">SMS</label>
 					</div>
 					<div class="flex items-center">
 						<input
@@ -129,20 +129,18 @@
 							bind:group={selectedCategory}
 							class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500"
 						/>
-						<label for="category-telephone" class="ml-2 text-sm text-gray-700">Telephone</label>
+						<label for="category-telephone" class="ml-2 text-sm">Telephone</label>
 					</div>
 				</div>
 			</div>
 
 			<div>
-				<label for="employee-group" class="block text-sm font-medium text-gray-700"
-					>Employee Group</label
-				>
+				<label for="employee-group" class="primary text-sm font-semibold">Employee Group</label>
 				<select
 					id="employee-group"
 					name="employeeGroup"
 					bind:value={selectedGroup}
-					class="mt-1 block rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+					class="mt-1 rounded-lg border bg-background p-2 outline-none"
 				>
 					<option value="" disabled selected>Choose a group</option>
 					{#each data.groups as group}
@@ -151,10 +149,22 @@
 				</select>
 			</div>
 
+			<div>
+				<label for="test-subject" class="primary block text-sm font-semibold">Email Subject</label>
+				<input
+					id="test-subject"
+					type="text"
+					name="subject"
+					placeholder="Enter email subject"
+					class="mt-1 w-full rounded-lg border bg-background px-4 py-2 outline-none"
+					required
+				/>
+			</div>
+
 			<div class="flex gap-4">
 				<div class="flex-1">
 					<div class="mb-2 flex w-full items-center justify-between">
-						<label for="html-editor" class="mb-2 block text-lg font-medium">HTML Editor</label>
+						<label for="html-editor" class="text-lg font-semibold">HTML Editor</label>
 						<div class="flex items-center space-x-4">
 							<input type="file" id="file-input" class="hidden" onchange={handleFileChange} />
 
@@ -169,7 +179,9 @@
 						</div>
 					</div>
 					<div class="flex">
-						<div class="rounded-l-lg bg-gray-100 px-2 py-4 text-center leading-5 text-gray-500">
+						<div
+							class="rounded-l-lg bg-background-900 px-2 py-4 text-center font-semibold leading-5 text-primary"
+						>
 							{#each lineNumbers as line}
 								<div>{line}</div>
 							{/each}
@@ -179,7 +191,7 @@
 							name="content"
 							bind:value={messageContent}
 							onkeydown={handleKeyDown}
-							class="min-h-64 w-full resize-none overflow-hidden rounded-r-lg border-l border-background-950 bg-background-950 p-4 font-mono text-sm leading-5 outline-none"
+							class="min-h-64 w-full resize-none overflow-hidden rounded-r-lg bg-background p-4 font-mono text-sm leading-5 outline-none"
 							oninput={updateLineNumbers}
 						></textarea>
 					</div>
@@ -190,7 +202,7 @@
 						<iframe
 							srcdoc={messageContent}
 							title="HTML preview"
-							class="h-full w-full overflow-visible rounded-lg border border-background-950"
+							class="h-full w-full overflow-visible rounded-lg border border-background-950 bg-background"
 						></iframe>
 					</div>
 				{/if}

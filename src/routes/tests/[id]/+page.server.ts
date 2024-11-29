@@ -7,52 +7,61 @@ export const load = async ({ params }: { params: { id: string } }) => {
 		throw new Error('Invalid test ID');
 	}
 
-	// Načtení celkového počtu logů
-	const totalLogs = await prisma.log.count({
-		where: {
-			testId
-		}
-	});
-
-	// Načtení úspěšných logů
-	const unsuccessfulLogs = await prisma.log.count({
-		where: {
-			testId,
-			action: {
-				in: ['CLICKED']
-			}
-		}
-	});
-
-	// Výpočet úspěšnosti
-	const successRate = totalLogs > 0 ? Math.round((unsuccessfulLogs / totalLogs) * 100) : 0;
-
 	// Načtení dat o testu
 	const test = await prisma.test.findUnique({
 		where: { id: testId },
 		include: {
-			admins: true, // Pokud chcete zahrnout i administrátory testu
-			employees: true // Pokud chcete zahrnout i zaměstnance spojené s testem
+			admins: true,
+			employees: true
 		}
 	});
 
 	if (!test) {
 		throw new Error(`Test with ID ${testId} not found`);
 	}
+
+	// Zaměstnanci spojené s testem a jejich nejnovější logy
 	const employees = await prisma.employee.findMany({
+		where: {
+			tests: {
+				some: {
+					id: testId
+				}
+			}
+		},
 		include: {
 			logs: {
 				where: { testId },
-				orderBy: { createdAt: 'desc' },
-				take: 1
+				orderBy: { createdAt: 'desc' }, // Seřadí logy podle nejnovějších
+				take: 1 // Vrátí pouze nejnovější log
 			}
 		}
 	});
 
-	const detailedLogs = employees.map((employee) => ({
+	// Získání nejnovějších logů
+	const latestLogs = employees
+		.map((employee: { logs: any[] }) => employee.logs[0]) // Získá první log pro každého zaměstnance
+		.filter((log: undefined) => log !== undefined); // Filtruje pouze existující logy
+
+	// Výpočet úspěšnosti
+	const successRate =
+		latestLogs.length > 0
+			? 100 -
+				Math.round(
+					(latestLogs.filter((log: { action: string }) => log.action === 'CLICKED').length /
+						latestLogs.length) *
+						100
+				)
+			: 100; // Pokud nejsou žádné logy, úspěšnost je 100 %
+
+	// Strukturování podrobností o logách
+	const detailedLogs = employees.map((employee: { logs: any[] }) => ({
 		employee,
-		latestLog: employee.logs[0] || null // Handle case where no log exists
+		latestLog: employee.logs[0] || null // Pokud není log, vrátí null
 	}));
+
+	console.log(successRate, test, detailedLogs);
+
 	// Návrat dat
 	return { successRate, test, logs: detailedLogs };
 };

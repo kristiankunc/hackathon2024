@@ -7,17 +7,6 @@ const setLocals: Handle = async ({ event, resolve }) => {
   const authSession = await event.locals.auth();
   log(event.url.href);
 
-<<<<<<< Updated upstream
-	if (!authSession) {
-		return new Response(null, {
-			status: 302,
-			headers: {
-				Location: '/auth/signin'
-				// location: '/landing'
-			}
-		});
-	}
-=======
   if (
     !authSession &&
     event.url.href != 'http://localhost:5173/landing' &&
@@ -31,7 +20,6 @@ const setLocals: Handle = async ({ event, resolve }) => {
       }
     });
   }
->>>>>>> Stashed changes
 
   if (authSession?.user?.name && authSession?.user?.email && authSession?.user?.image) {
     event.locals.user = {

@@ -131,23 +131,36 @@
 				</select>
 			</div>
 
-			<div class="relative w-full md:w-1/2">
-				<label for="html-editor" class="mb-2 block text-lg font-medium">HTML Editor</label>
-				<div class="flex">
-					<div class="bg-gray-100 px-2 py-4 text-center leading-5 text-gray-500">
-						{#each lineNumbers as line}
-							<div>{line}</div>
-						{/each}
+			<div class="flex space-x-6">
+				<div class="relative w-full md:w-1/2">
+					<label for="html-editor" class="mb-2 block text-lg font-medium">HTML Editor</label>
+					<div class="flex">
+						<div class="bg-gray-100 px-2 py-4 text-center leading-5 text-gray-500">
+							{#each lineNumbers as line}
+								<div>{line}</div>
+							{/each}
+						</div>
+						<textarea
+							id="html-editor"
+							name="content"
+							bind:value={messageContent}
+							onkeydown={handleKeyDown}
+							class="h-64 w-full resize-none rounded-r-lg border-l border-gray-300 bg-gray-50 p-4 font-mono text-sm leading-5 focus:ring focus:ring-blue-300"
+							oninput={updateLineNumbers}
+						></textarea>
 					</div>
-					<textarea
-						id="html-editor"
-						name="content"
-						bind:value={messageContent}
-						onkeydown={handleKeyDown}
-						class="h-64 w-full resize-none rounded-r-lg border-l border-gray-300 bg-gray-50 p-4 font-mono text-sm leading-5 focus:ring focus:ring-blue-300"
-						oninput={updateLineNumbers}
-					></textarea>
 				</div>
+
+				{#if selectedCategory === 'email'}
+					<div class="w-1/2">
+						<h2 class="mt-6 text-xl font-bold text-gray-800">HTML preview</h2>
+						<iframe
+							srcdoc={messageContent}
+							title="HTML preview"
+							class="h-80 w-full border border-gray-300"
+						></iframe>
+					</div>
+				{/if}
 			</div>
 
 			<div class="flex justify-end">
@@ -160,15 +173,4 @@
 			</div>
 		</form>
 	</section>
-
-	{#if selectedCategory === 'email'}
-		<div>
-			<h2 class="mt-6 text-xl font-bold text-gray-800">HTML preview</h2>
-			<iframe
-				srcdoc={messageContent}
-				title="HTML preview"
-				class="h-80 w-full border border-gray-300"
-			></iframe>
-		</div>
-	{/if}
 </div>

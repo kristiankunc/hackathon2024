@@ -1,4 +1,5 @@
 <script>
+	import { page } from '$app/stores';
 	import Button from '$lib/components/ui/button.svelte';
 </script>
 
@@ -54,9 +55,15 @@
 				you and your employees recognize phishing emails.<br /><br />
 				<b>Sign up today and protect your business from cyber attacks.</b>
 			</p>
-			<Button href="/auth/signin" additionalStyle="mx-auto mt-16 w-2/3">
-				<span>I'm in!</span>
-			</Button>
+			{#if !$page.data.user}
+				<Button href="/auth/signin" additionalStyle="mx-auto mt-16 w-2/3">
+					<span>I'm in!</span>
+				</Button>
+			{:else}
+				<Button href="/tests" additionalStyle="mx-auto mt-16 w-2/3">
+					<span>Create your first test</span>
+				</Button>
+			{/if}
 		</div>
 	</section>
 </main>

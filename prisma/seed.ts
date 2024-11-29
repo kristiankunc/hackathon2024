@@ -64,6 +64,17 @@ const main = async () => {
 			});
 		}
 	}
+
+	await prisma.test.update({
+		where: {
+			id: test.id
+		},
+		data: {
+			employees: {
+				connect: allEmployees.map((employee) => ({ id: employee.id }))
+			}
+		}
+	});
 };
 
 main()

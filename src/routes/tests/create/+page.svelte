@@ -1,7 +1,9 @@
 <script lang="ts">
 	let selectedCategory = $state('email');
 	let selectedGroup = $state('');
-	let messageContent = $state('h1>Hello, world!</h1>\n<p>Edit the HTML in the textarea below.</p>');
+	let messageContent = $state(
+		'<h1>Hello, world!</h1>\n<p>Edit the HTML in the textarea below.</p>'
+	);
 
 	let lineNumbers: number[] = $state([]);
 	let { data } = $props();

@@ -180,6 +180,17 @@
 						oninput={updateLineNumbers}
 					></textarea>
 				</div>
+
+				{#if selectedCategory === 'email'}
+					<div class="w-1/2">
+						<h2 class="mt-6 text-xl font-bold text-gray-800">HTML preview</h2>
+						<iframe
+							srcdoc={messageContent}
+							title="HTML preview"
+							class="h-80 w-full border border-gray-300"
+						></iframe>
+					</div>
+				{/if}
 			</div>
 
 			<div class="flex justify-end">
@@ -192,15 +203,4 @@
 			</div>
 		</form>
 	</section>
-
-	{#if selectedCategory === 'email'}
-		<div>
-			<h2 class="mt-6 text-xl font-bold text-gray-800">HTML preview</h2>
-			<iframe
-				srcdoc={messageContent}
-				title="HTML preview"
-				class="h-80 w-full border border-gray-300"
-			></iframe>
-		</div>
-	{/if}
 </div>

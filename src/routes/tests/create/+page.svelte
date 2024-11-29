@@ -1,9 +1,10 @@
 <script lang="ts">
-	let selectedCategory = $state('');
+	let selectedCategory = $state('email');
 	let selectedGroup = $state('');
 	let messageContent = $state('h1>Hello, world!</h1>\n<p>Edit the HTML in the textarea below.</p>');
 
 	let lineNumbers: number[] = $state([]);
+	let { data } = $props();
 
 	const updateLineNumbers = () => {
 		lineNumbers = messageContent.split('\n').map((_, i) => i + 1);
@@ -53,6 +54,7 @@
 					name="name"
 					placeholder="Enter test name"
 					class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+					required
 				/>
 			</div>
 
@@ -66,6 +68,7 @@
 					name="description"
 					placeholder="Enter test description"
 					class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+					required
 				/>
 			</div>
 
@@ -80,6 +83,7 @@
 							value="email"
 							bind:group={selectedCategory}
 							class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500"
+							checked
 						/>
 						<label for="category-email" class="ml-2 text-sm text-gray-700">Email</label>
 					</div>
@@ -119,10 +123,9 @@
 					class="mt-1 block rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
 				>
 					<option value="" disabled selected>Choose a group</option>
-					<option value="management">IT</option>
-					<option value="engineering">HR</option>
-					<option value="sales">Sales</option>
-					<option value="support">Support</option>
+					{#each data.groups as group}
+						<option value={group.name.toLowerCase()}>{group.name}</option>
+					{/each}
 				</select>
 			</div>
 

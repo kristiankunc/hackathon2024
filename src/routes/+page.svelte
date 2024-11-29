@@ -5,12 +5,12 @@
 
 <div class="fixed inset-0 -z-20">
 	<video autoplay loop muted playsinline class="h-full w-full object-cover">
-		<source src="/36784-412873690_tiny.mp4" type="video/mp4" />
+		<source src="/landing.mp4" type="video/mp4" />
 		Your browser does not support the video tag.
 	</video>
 </div>
 
-<div class="fixed bottom-0 left-0 right-0 top-0 -z-10 bg-text opacity-80"></div>
+<div class="fixed bottom-0 left-0 right-0 top-0 -z-10 bg-text opacity-35"></div>
 <main class="z-10 my-16">
 	<section class="flex flex-col items-center text-center">
 		<h1 class="w-1/2 text-5xl font-semibold text-background">

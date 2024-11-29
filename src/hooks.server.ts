@@ -11,14 +11,14 @@ const setLocals: Handle = async ({ event, resolve }) => {
 
   if (
     !authSession &&
-    event.url.href != 'http://' + domain + '/landing' &&
-    event.url.href != 'http://' + domain + '/auth/signin'
+    event.url.href != 'http://' + domain + '/' &&
+    event.url.href != 'http://' + domain + '/auth/signin/'
   ) {
     return new Response(null, {
       status: 302,
       headers: {
         // Location: '/auth/signin'
-        Location: '/landing'
+        Location: '/'
       }
     });
   }

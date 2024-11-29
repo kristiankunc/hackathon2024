@@ -15,18 +15,19 @@
 		}
 	];
 
-	const keyColors = ['#435fcb', '#d873d0'];
+	const keyColors = ['#51c6aa', '#cf7d6d'];
+	console.log(data.test.employees);
 </script>
 
-<div class="w-full p-4">
+<div class="w-full p-8">
 	<h1 class="text-2xl font-semibold">Test results: {data.test.name}</h1>
 	<div class="mt-4 grid w-full grid-cols-2 gap-4">
 		<div class="flex h-fit items-center rounded-lg border bg-background-950 p-4 shadow">
 			<div class="w-1/3 text-center">
 				<h3 class="text-xl font-semibold">Risky behaviour:</h3>
-				<h2 class="text-4xl font-bold text-accent">{graphData[1].value}%</h2>
+				<h2 class="text-4xl font-bold text-[#cf7d6d]">{graphData[1].value}%</h2>
 				<h3 class="mt-8 font-semibold">Safe behaviour:</h3>
-				<h2 class="text-3xl font-bold text-primary">{graphData[0].value}%</h2>
+				<h2 class="text-3xl font-bold text-[#51c6aa]">{graphData[0].value}%</h2>
 			</div>
 			<div class="h-72 grow p-4">
 				<Chart data={graphData} x="value" c="color" cRange={keyColors}>
@@ -43,7 +44,7 @@
 			<h2 class="mb-4 font-semibold">Participants:</h2>
 
 			{#each data.test.employees as employee}
-				<UserProfile name={employee.name} mail={employee.email} passed={employee.passed} />
+				<UserProfile {employee} />
 			{/each}
 
 			<!-- <UserProfile /> -->

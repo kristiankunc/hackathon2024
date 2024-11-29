@@ -15,17 +15,17 @@ export const load = async ({ params }: { params: { id: string } }) => {
 	});
 
 	// Načtení úspěšných logů
-	const successfulLogs = await prisma.log.count({
+	const unsuccessfulLogs = await prisma.log.count({
 		where: {
 			testId,
 			action: {
-				in: ['READ', 'CLICKED']
+				in: ['CLICKED']
 			}
 		}
 	});
 
 	// Výpočet úspěšnosti
-	const successRate = totalLogs > 0 ? Math.round((successfulLogs / totalLogs) * 100) : 0;
+	const successRate = totalLogs > 0 ? Math.round((unsuccessfulLogs / totalLogs) * 100) : 0;
 
 	// Načtení dat o testu
 	const test = await prisma.test.findUnique({

@@ -117,7 +117,7 @@ export const actions = {
 						pass: process.env.EMAIL_PASS // Heslo aplikace
 					}
 				});
-		
+
 				// Odeslání e-mailu
 				await transporter.sendMail({
 					from: process.env.EMAIL_USER, // Výchozí odesílatel
@@ -125,20 +125,19 @@ export const actions = {
 					subject: subject as string,
 					html: messageContent as string
 				});
-		
+
 				return new Response(JSON.stringify({ message: 'E-mail odeslán!' }), {
 					status: 200,
 					headers: { 'Content-Type': 'application/json' }
 				});
 			} catch (error) {
 				console.error('Chyba při odesílání e-mailu:', error);
-		
+
 				return new Response(JSON.stringify({ error: 'Chyba při odesílání e-mailu.' }), {
 					status: 500,
 					headers: { 'Content-Type': 'application/json' }
 				});
 			}
-			
 		};
 
 		if (category === 'email') {

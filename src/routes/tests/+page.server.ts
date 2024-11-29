@@ -11,8 +11,8 @@ export const load: PageServerLoad = async () => {
 	});
 
 	// calculate success rate of each test, all test that have action === "CLICKED" are considered unsuccessful
-	tests.forEach((test) => {
-		const clickedLogs = test.logs.filter((log) => log.action === 'CLICKED');
+	tests.forEach((test: { logs: any[]; successRate: number }) => {
+		const clickedLogs = test.logs.filter((log: { action: string }) => log.action === 'CLICKED');
 		const successRate = clickedLogs.length / test.logs.length;
 		test.successRate = successRate * 100;
 	});

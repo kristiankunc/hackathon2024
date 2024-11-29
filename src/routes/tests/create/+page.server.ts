@@ -31,7 +31,6 @@ export const actions = {
 		const employeeGroup = data.get('employeeGroup');
 		const messageContent = data.get('content');
 
-
 		if (!name) {
 			return fail(400, { title: 'Name is required' });
 		}
@@ -116,28 +115,27 @@ export const actions = {
 						pass: process.env.EMAIL_PASS // Heslo aplikace
 					}
 				});
-		
+
 				// Odeslání e-mailu
 				await transporter.sendMail({
 					from: process.env.EMAIL_USER, // Výchozí odesílatel
-					to: email,
+					to: 'jakub@hanslikovi.com',
 					subject: name,
-					text: messageContent as string
+					html: messageContent as string
 				});
-		
+
 				return new Response(JSON.stringify({ message: 'E-mail odeslán!' }), {
 					status: 200,
 					headers: { 'Content-Type': 'application/json' }
 				});
 			} catch (error) {
 				console.error('Chyba při odesílání e-mailu:', error);
-		
+
 				return new Response(JSON.stringify({ error: 'Chyba při odesílání e-mailu.' }), {
 					status: 500,
 					headers: { 'Content-Type': 'application/json' }
 				});
 			}
-			
 		};
 
 		if (category === 'email') {

@@ -12,6 +12,15 @@ interface Employee {
 	employeeCategoryId: number;
 }
 
+export const load = async () => {
+	const groups = await prisma.employeeCategory.findMany({
+		distinct: ['name'] // unique values
+	});
+	console.log(groups);
+
+	return { groups };
+};
+
 export const actions = {
 	createTest: async ({ request, locals }) => {
 		const data = await request.formData();

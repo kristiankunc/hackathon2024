@@ -23,7 +23,7 @@
 		</Button>
 		<a class="text-lg font-bold" href="/">LOGO</a>
 
-		<a href="/about" class="group">
+		<a href="/landing" class="group">
 			About
 			<span class="block h-0.5 max-w-0 bg-text duration-300 group-hover:max-w-full"></span>
 		</a>

@@ -124,7 +124,7 @@ export const actions = {
 				// Odeslání e-mailu
 				await transporter.sendMail({
 					from: process.env.EMAIL_USER, // Výchozí odesílatel
-					to: "jakub@hanslikovi.com",
+					to: email, // Příjemce
           
 					subject: subject as string,
 					html: messageContent as string

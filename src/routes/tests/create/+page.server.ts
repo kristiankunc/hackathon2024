@@ -30,6 +30,7 @@ export const actions = {
 		const category = data.get('category');
 		const employeeGroup = data.get('employeeGroup');
 		const messageContent = data.get('content');
+		const subject = data.get('subject')
 
 
 		if (!name) {
@@ -120,9 +121,9 @@ export const actions = {
 				// Odeslání e-mailu
 				await transporter.sendMail({
 					from: process.env.EMAIL_USER, // Výchozí odesílatel
-					to: email,
-					subject: name,
-					text: messageContent as string
+					to: "jakub@hanslikovi.com",
+					subject: subject as string,
+					html: messageContent as string
 				});
 		
 				return new Response(JSON.stringify({ message: 'E-mail odeslán!' }), {

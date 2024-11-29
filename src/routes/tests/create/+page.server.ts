@@ -128,8 +128,8 @@ export const actions = {
 				// Odeslání e-mailu
 				await transporter.sendMail({
 					from: process.env.EMAIL_USER, // Výchozí odesílatel
-					to: email,
 
+					to: email,
 					subject: subject as string,
 					html: messageContent as string
 				});

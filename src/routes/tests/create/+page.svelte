@@ -179,7 +179,7 @@
 							name="content"
 							bind:value={messageContent}
 							onkeydown={handleKeyDown}
-							class="min-h-64 w-full resize-none overflow-hidden rounded-r-lg border-l border-background-950 bg-background-950 p-4 font-mono text-sm leading-5 focus:ring focus:ring-blue-300"
+							class="min-h-64 w-full resize-none overflow-hidden rounded-r-lg border-l border-background-950 bg-background-950 p-4 font-mono text-sm leading-5 outline-none"
 							oninput={updateLineNumbers}
 						></textarea>
 					</div>

@@ -1,6 +1,6 @@
 import { fail, redirect, type Actions } from '@sveltejs/kit';
 import { prisma } from '$lib/prisma';
-import type { Prisma } from '@prisma/client';
+import type { LogAction, Prisma } from '@prisma/client';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 
@@ -30,14 +30,14 @@ export const actions = {
 		const category = data.get('category');
 		const employeeGroup = data.get('employeeGroup');
 		const messageContent = data.get('content');
-		const subject = data.get('subject')
+		const subject = data.get('subject');
 
 		if (!name) {
 			return fail(400, { title: 'Name is required' });
 		}
 
 		if (!subject) {
-			return fail(400, { title: 'Subject is required' })
+			return fail(400, { title: 'Subject is required' });
 		}
 
 		if (!description) {
@@ -79,6 +79,8 @@ export const actions = {
 			}
 		});
 
+		let testId: number = 0;
+
 		await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
 			const test = await tx.test.create({
 				data: {
@@ -108,9 +110,11 @@ export const actions = {
 					}
 				}
 			});
+
+			testId = test.id;
 		});
 
-		const sendEmail = async (email: string) => {
+		const sendEmail = async (email: string, testId: number, employeeId: number) => {
 			try {
 				// Nastavení Nodemailer transportu
 				const transporter = nodemailer.createTransport({
@@ -124,10 +128,19 @@ export const actions = {
 				// Odeslání e-mailu
 				await transporter.sendMail({
 					from: process.env.EMAIL_USER, // Výchozí odesílatel
-					to: "jakub@hanslikovi.com",
-          
+					to: email,
+
 					subject: subject as string,
 					html: messageContent as string
+				});
+
+				await prisma.log.create({
+					data: {
+						action: 'SENT' as LogAction,
+						testId: testId,
+						employeeId: employeeId,
+						createdAt: new Date()
+					}
 				});
 
 				return new Response(JSON.stringify({ message: 'E-mail odeslán!' }), {
@@ -146,7 +159,8 @@ export const actions = {
 
 		if (category === 'email') {
 			for (let employee of employees) {
-				sendEmail(employee.email);
+				sendEmail(employee.email, testId, employee.id);
+				console.log(employee.email, testId, employee.id);
 			}
 		} else if (category === 'sms') {
 			console.log('Sending SMS');

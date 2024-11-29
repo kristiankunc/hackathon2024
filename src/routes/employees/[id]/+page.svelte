@@ -3,6 +3,8 @@
 	import Button from '$lib/components/ui/button.svelte';
 	import { Chart, Pie, Svg } from 'layerchart';
 
+  console.log($page.data);
+
 	const graphData = [
 		{
 			value: $page.data.successRate,

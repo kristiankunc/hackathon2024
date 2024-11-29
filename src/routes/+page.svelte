@@ -5,18 +5,18 @@
 
 <div class="fixed inset-0 -z-20">
 	<video autoplay loop muted playsinline class="h-full w-full object-cover">
-		<source src="/36784-412873690_tiny.mp4" type="video/mp4" />
+		<source src="/landing.mp4" type="video/mp4" />
 		Your browser does not support the video tag.
 	</video>
 </div>
 
-<div class="fixed bottom-0 left-0 right-0 top-0 -z-10 bg-text opacity-80"></div>
+<div class="fixed bottom-0 left-0 right-0 top-0 -z-10 bg-text opacity-35"></div>
 <main class="z-10 my-16">
 	<section class="flex flex-col items-center text-center">
 		<h1 class="w-1/2 text-5xl font-semibold text-background">
 			Employees are the first line of defense against cyber attacks.
 		</h1>
-		<div class="my-16 w-2/3 rounded-lg bg-background p-8 opacity-75">
+		<div class="my-16 w-2/3 rounded-lg bg-background p-8 opacity-85">
 			<div class="flex justify-between gap-8">
 				<div class="grow">
 					<h3 class="mb-4 text-5xl font-bold text-secondary">3.4 bil.</h3>
@@ -41,7 +41,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="mx-auto w-2/3 rounded-lg bg-background bg-opacity-75 p-8">
+		<div class="mx-auto w-2/3 rounded-lg bg-background bg-opacity-85 p-8">
 			<h2 class="mb-8 text-2xl font-semibold">
 				Let us help you protect your business with PhishTest.
 			</h2>

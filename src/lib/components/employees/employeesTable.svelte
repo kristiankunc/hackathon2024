@@ -24,8 +24,8 @@
 			</tr>
 		</thead>
 		<tbody class="divide-y divide-gray-200">
-			{#each propEmployees as employee}
-				<tr class="hover:bg-background-950">
+			{#each propEmployees as employee, i}
+				<tr class={`hover:bg-background-950 ${i % 2 == 0 ? 'bg-background-900' : ''}`}>
 					<td class="px-6 py-4">{employee.firstName}</td>
 					<td class="px-6 py-4">{employee.lastName}</td>
 					<td class="px-6 py-4">{employee.email}</td>

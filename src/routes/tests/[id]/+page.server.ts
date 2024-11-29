@@ -7,32 +7,12 @@ export const load = async ({ params }: { params: { id: string } }) => {
 		throw new Error('Invalid test ID');
 	}
 
-	// Načtení celkového počtu logů
-	const totalLogs = await prisma.log.count({
-		where: {
-			testId
-		}
-	});
-
-	// Načtení úspěšných logů
-	const unsuccessfulLogs = await prisma.log.count({
-		where: {
-			testId,
-			action: {
-				in: ['CLICKED']
-			}
-		}
-	});
-
-	// Výpočet úspěšnosti
-	const successRate = totalLogs > 0 ? Math.round((unsuccessfulLogs / totalLogs) * 100) : 0;
-
 	// Načtení dat o testu
 	const test = await prisma.test.findUnique({
 		where: { id: testId },
 		include: {
-			admins: true, // Pokud chcete zahrnout i administrátory testu
-			employees: true // Pokud chcete zahrnout i zaměstnance spojené s testem
+			admins: true,
+			employees: true
 		}
 	});
 
@@ -48,6 +28,13 @@ export const load = async ({ params }: { params: { id: string } }) => {
 			}
 		}
 	});
+
+	const latestLogs = employees.map((employee) => employee.logs[0]);
+	const successRate =
+		100 -
+		Math.round(
+			(latestLogs.filter((log) => log.action === 'CLICKED').length / latestLogs.length) * 100
+		);
 
 	const detailedLogs = employees.map((employee) => ({
 		employee,

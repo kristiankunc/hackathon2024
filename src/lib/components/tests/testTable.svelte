@@ -23,8 +23,8 @@
 			</tr>
 		</thead>
 		<tbody class="divide-y divide-gray-200">
-			{#each propTests as test}
-				<tr class="hover:bg-background-950">
+			{#each propTests as test, i}
+				<tr class={`hover:bg-background-950 ${i % 2 == 0 ? 'bg-background-900' : ''}`}>
 					<td class="px-6 py-4">{test.createdAt.toLocaleDateString()}</td>
 					<td class="px-6 py-4">{test.name}</td>
 					<td class="px-6 py-4">{test.description}</td>

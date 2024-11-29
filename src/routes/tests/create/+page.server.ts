@@ -37,6 +37,10 @@ export const actions = {
 			return fail(400, { title: 'Name is required' });
 		}
 
+		if (!subject) {
+			return fail(400, { title: 'Subject is required' })
+		}
+
 		if (!description) {
 			return fail(400, { title: 'Description is required' });
 		}

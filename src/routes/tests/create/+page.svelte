@@ -150,6 +150,17 @@
 					{/each}
 				</select>
 			</div>
+			<div>
+				<label for="test-subject" class="block text-sm font-medium text-gray-700">Email Subject</label>
+				<input
+					id="test-subject"
+					type="text"
+					name="subject"
+					placeholder="Enter email subject"
+					class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+					required
+				/>
+			</div>
 
 			<div class="flex gap-4">
 				<div class="flex-1">

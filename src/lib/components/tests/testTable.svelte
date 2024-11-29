@@ -2,7 +2,7 @@
 	import Button from '../ui/button.svelte';
 
 	let { propTests } = $props();
-  console.log(propTests);
+	console.log(propTests);
 </script>
 
 <div class="rounded-lg border bg-background">
@@ -28,7 +28,7 @@
 					<td class="px-6 py-4">{test.createdAt.toLocaleDateString()}</td>
 					<td class="px-6 py-4">{test.name}</td>
 					<td class="px-6 py-4">{test.description}</td>
-					<td class="px-6 py-4">{test.successRate}%</td>
+					<td class="px-6 py-4">{Math.round(test.successRate)}%</td>
 					<td class="px-6 py-4">
 						<Button preset="skeleton" href={`/tests/${test.id}`}>View</Button>
 					</td>

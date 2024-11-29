@@ -12,6 +12,7 @@ model Test {
     name           String
     description    String
     messageContent String?    @db.Text
+    createdAt      DateTime   @default(now())
     admins         Admin[]
     employees      Employee[]
     logs           Log[]

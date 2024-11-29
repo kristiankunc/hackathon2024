@@ -149,45 +149,46 @@
 				</select>
 			</div>
 
-			<div class="relative w-full md:w-2/3">
-				<div class="mb-2 flex w-full items-center justify-between">
-					<label for="html-editor" class="mb-2 block text-lg font-medium">HTML Editor</label>
-					<div class="flex items-center space-x-4">
-						<input type="file" id="file-input" class="hidden" onchange={handleFileChange} />
+			<div class="flex gap-4">
+				<div class="flex-1">
+					<div class="mb-2 flex w-full items-center justify-between">
+						<label for="html-editor" class="mb-2 block text-lg font-medium">HTML Editor</label>
+						<div class="flex items-center space-x-4">
+							<input type="file" id="file-input" class="hidden" onchange={handleFileChange} />
 
-						<label
-							for="file-input"
-							class="cursor-pointer rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:outline-none"
-						>
-							Choose File
-						</label>
+							<label
+								for="file-input"
+								class="cursor-pointer rounded-lg bg-secondary px-4 py-2 text-white transition hover:bg-secondary-400 focus:outline-none"
+							>
+								Choose File
+							</label>
 
-						<span id="file-name" class="text-gray-700">{selectedFileName}</span>
+							<span id="file-name" class="text-gray-700">{selectedFileName}</span>
+						</div>
 					</div>
-				</div>
-				<div class="flex">
-					<div class="rounded-l-lg bg-gray-100 px-2 py-4 text-center leading-5 text-gray-500">
-						{#each lineNumbers as line}
-							<div>{line}</div>
-						{/each}
+					<div class="flex">
+						<div class="rounded-l-lg bg-gray-100 px-2 py-4 text-center leading-5 text-gray-500">
+							{#each lineNumbers as line}
+								<div>{line}</div>
+							{/each}
+						</div>
+						<textarea
+							id="html-editor"
+							name="content"
+							bind:value={messageContent}
+							onkeydown={handleKeyDown}
+							class="min-h-64 w-full resize-none overflow-hidden rounded-r-lg border-l border-background-950 bg-background-950 p-4 font-mono text-sm leading-5 focus:ring focus:ring-blue-300"
+							oninput={updateLineNumbers}
+						></textarea>
 					</div>
-					<textarea
-						id="html-editor"
-						name="content"
-						bind:value={messageContent}
-						onkeydown={handleKeyDown}
-						class="min-h-64 w-full resize-none overflow-hidden rounded-r-lg border-l border-gray-300 bg-gray-50 p-4 font-mono text-sm leading-5 focus:ring focus:ring-blue-300"
-						oninput={updateLineNumbers}
-					></textarea>
 				</div>
 
 				{#if selectedCategory === 'email'}
-					<div class="w-1/2">
-						<h2 class="mt-6 text-xl font-bold text-gray-800">HTML preview</h2>
+					<div class="flex-1">
 						<iframe
 							srcdoc={messageContent}
 							title="HTML preview"
-							class="h-80 w-full border border-gray-300"
+							class="h-full w-full overflow-visible rounded-lg border border-background-950"
 						></iframe>
 					</div>
 				{/if}
@@ -196,7 +197,7 @@
 			<div class="flex justify-end">
 				<button
 					type="submit"
-					class="rounded bg-green-600 px-6 py-2 text-white shadow transition hover:bg-green-700"
+					class="rounded-lg bg-secondary px-6 py-2 text-background shadow transition hover:bg-secondary-400"
 				>
 					Create Test
 				</button>

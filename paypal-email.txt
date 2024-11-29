@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Email Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo img {
+            max-width: 150px;
+        }
+        .email-content {
+            line-height: 1.6;
+        }
+        .email-content h1 {
+            font-size: 18px;
+            color: #0056b3;
+        }
+        .button {
+            display: block;
+            width: fit-content;
+            background-color: #0070ba;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 5px;
+            margin: 20px auto 0;
+        }
+        .button:hover {
+            background-color: #005b93;
+        }
+        .footer {
+            font-size: 12px;
+            text-align: center;
+            margin-top: 20px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="logo">
+            <img src="https://newsroom.paypal-corp.com/image/pp_h_rgb_logo_tn.jpg" alt="PayPal Logo">
+        </div>
+        <div class="email-content">
+            <h1>Dear PayPal customer,</h1>
+            <p>Your PayPal account is limited. You have 24 hours to solve the problem or your account will be permanently disabled.</p>
+            <p>We are sorry to inform you that you no longer have access to PayPal‘s advantages like purchasing, and sending and receiving money.</p>
+            <h2>Why is my PayPal account limited?</h2>
+            <p>We believe that your account is in danger from unauthorized users.</p>
+            <h2>What can I do to resolve the problem?</h2>
+            <p>You have to confirm all of your account details on our secured server by clicking the link below and following the steps.</p>
+            <a href="#" class="button">Confirm Your Information</a>
+        </div>
+        <div class="footer">
+            This is an automated email. Please do not reply.
+        </div>
+    </div>
+</body>
+</html>

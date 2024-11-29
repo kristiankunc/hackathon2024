@@ -29,14 +29,19 @@ export const load = async ({ params }: { params: { id: string } }) => {
 		}
 	});
 
-	const latestLogs = employees.map((employee) => employee.logs[0]);
+	const latestLogs = employees
+		.map((employee: { logs: any[] }) => employee.logs[0])
+		.filter((log: undefined) => log !== undefined); // Filtruje pouze existující logy
+
 	const successRate =
 		100 -
 		Math.round(
-			(latestLogs.filter((log) => log.action === 'CLICKED').length / latestLogs.length) * 100
+			(latestLogs.filter((log: { action: string }) => log.action === 'CLICKED').length /
+				latestLogs.length) *
+				100
 		);
 
-	const detailedLogs = employees.map((employee) => ({
+	const detailedLogs = employees.map((employee: { logs: any[] }) => ({
 		employee,
 		latestLog: employee.logs[0] || null // Handle case where no log exists
 	}));

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Button from '$lib/components/ui/button.svelte';
+
 	let selectedCategory = $state('email');
 	let selectedGroup = $state('');
 	let messageContent = $state(
@@ -158,7 +160,7 @@
 
 							<label
 								for="file-input"
-								class="cursor-pointer rounded-lg bg-secondary px-4 py-2 text-white transition hover:bg-secondary-400 focus:outline-none"
+								class="cursor-pointer rounded-lg border border-primary bg-primary p-2 text-background transition hover:bg-background hover:text-primary focus:outline-none"
 							>
 								Choose File
 							</label>
@@ -195,12 +197,7 @@
 			</div>
 
 			<div class="flex justify-end">
-				<button
-					type="submit"
-					class="rounded-lg bg-secondary px-6 py-2 text-background shadow transition hover:bg-secondary-400"
-				>
-					Create Test
-				</button>
+				<Button type="submit">Create Test</Button>
 			</div>
 		</form>
 	</section>

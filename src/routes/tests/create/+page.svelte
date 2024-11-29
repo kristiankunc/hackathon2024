@@ -38,6 +38,24 @@
 			updateLineNumbers();
 		}
 	};
+
+	let selectedFileName: string = $state('No file chosen');
+
+	const handleFileChange = (event: Event): void => {
+		const input = event.target as HTMLInputElement;
+		const file = input.files?.[0];
+
+		console.log(file);
+
+		if (file && file.type === 'text/html') {
+			file.text().then((text) => {
+				messageContent = text;
+				updateLineNumbers();
+			});
+		}
+
+		selectedFileName = file ? file.name : 'No file chosen';
+	};
 </script>
 
 <div class="px-8 py-4">
@@ -131,10 +149,24 @@
 				</select>
 			</div>
 
-			<div class="relative w-full md:w-1/2">
-				<label for="html-editor" class="mb-2 block text-lg font-medium">HTML Editor</label>
+			<div class="relative w-full md:w-2/3">
+				<div class="mb-2 flex w-full items-center justify-between">
+					<label for="html-editor" class="mb-2 block text-lg font-medium">HTML Editor</label>
+					<div class="flex items-center space-x-4">
+						<input type="file" id="file-input" class="hidden" onchange={handleFileChange} />
+
+						<label
+							for="file-input"
+							class="cursor-pointer rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:outline-none"
+						>
+							Choose File
+						</label>
+
+						<span id="file-name" class="text-gray-700">{selectedFileName}</span>
+					</div>
+				</div>
 				<div class="flex">
-					<div class="bg-gray-100 px-2 py-4 text-center leading-5 text-gray-500">
+					<div class="rounded-l-lg bg-gray-100 px-2 py-4 text-center leading-5 text-gray-500">
 						{#each lineNumbers as line}
 							<div>{line}</div>
 						{/each}
@@ -144,7 +176,7 @@
 						name="content"
 						bind:value={messageContent}
 						onkeydown={handleKeyDown}
-						class="h-64 w-full resize-none rounded-r-lg border-l border-gray-300 bg-gray-50 p-4 font-mono text-sm leading-5 focus:ring focus:ring-blue-300"
+						class="min-h-64 w-full resize-none overflow-hidden rounded-r-lg border-l border-gray-300 bg-gray-50 p-4 font-mono text-sm leading-5 focus:ring focus:ring-blue-300"
 						oninput={updateLineNumbers}
 					></textarea>
 				</div>

@@ -7,5 +7,7 @@ export const load: PageServerLoad = async () => {
 			category: true
 		}
 	});
-	return { employees };
+	
+	const groups = await prisma.employeeCategory.findMany();
+	return { employees, groups };
 };

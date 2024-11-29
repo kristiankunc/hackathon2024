@@ -32,7 +32,7 @@
 			<div class="h-72 grow p-4">
 				<Chart data={graphData} x="value" c="color" cRange={keyColors}>
 					<Svg center>
-						<Pie innerRadius={100} padAngle={0.03} />
+						<Pie innerRadius={100} />
 					</Svg>
 				</Chart>
 			</div>

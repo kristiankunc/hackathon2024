@@ -2,21 +2,26 @@
 	import { page } from '$app/stores';
 	import UserProfile from '$lib/components/tests/userProfile.svelte';
 	import { BarChart, Chart, ColorRamp, Pie, PieChart, Svg } from 'layerchart';
+	import { onMount } from 'svelte';
 
 	let { data } = $props();
 
 	const graphData = [
 		{
-			value: data.successRate,
+			value: data.actionRates.sent,
+			color: 2
+		},
+		{
+			value: data.actionRates.clicked,
 			color: 1
 		},
 		{
-			value: 100 - data.successRate,
+			value: data.actionRates.read,
 			color: 0
 		}
 	];
 
-	const keyColors = ['#51c6aa', '#cf7d6d'];
+	const keyColors = ['#51c6aa', '#cf7d6d', 'black'];
 </script>
 
 <div class="w-full p-8">
@@ -26,8 +31,12 @@
 			<div class="w-1/3 text-center">
 				<h3 class="text-xl font-semibold">Risky behaviour:</h3>
 				<h2 class="text-4xl font-bold text-[#cf7d6d]">{graphData[1].value}%</h2>
-				<h3 class="mt-8 font-semibold">Safe behaviour:</h3>
-				<h2 class="text-3xl font-bold text-[#51c6aa]">{graphData[0].value}%</h2>
+				<h3 class="mt-8 text-sm font-semibold">
+					<span class="mr-1 text-xs font-medium">(mostly)</span>Safe behaviour:
+				</h3>
+				<h2 class="text-2xl font-bold text-[#51c6aa]">
+					{graphData[0].value + graphData[2].value}%
+				</h2>
 			</div>
 			<div class="h-72 grow p-4">
 				<Chart data={graphData} x="value" c="color" cRange={keyColors}>
@@ -43,8 +52,14 @@
 		>
 			<h2 class="mb-4 font-semibold">Participants:</h2>
 
-			{#each $page.data.logs as log}
-				<UserProfile {log} />
+			{#each data.employeesClicked as employee, i}
+				<UserProfile {employee} action="CLICKED" />
+			{/each}
+			{#each data.employeesRead as employee, i}
+				<UserProfile {employee} action="READ" />
+			{/each}
+			{#each data.employeesSent as employee, i}
+				<UserProfile {employee} action="SENT" />
 			{/each}
 
 			<!-- <UserProfile /> -->

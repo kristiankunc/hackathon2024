@@ -1,5 +1,10 @@
-<script>
-	import Button from '$lib/components/ui/button.svelte';
+<script lang="ts">
+	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		goto('/landing');
+	});
 </script>
 
 <h1>Welcome to SvelteKit</h1>

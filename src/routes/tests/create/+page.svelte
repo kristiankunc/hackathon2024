@@ -1,19 +1,19 @@
 <script lang="ts">
-	let selectedCategory = $state('');
+	let selectedCategory = $state('email');
 	let selectedGroup = $state('');
-	let messageContent = $state('h1>Hello, world!</h1>\n<p>Edit the HTML in the textarea below.</p>');
+	let messageContent = $state(
+		'<h1>Hello, world!</h1>\n<p>Edit the HTML in the textarea below.</p>'
+	);
 
 	let lineNumbers: number[] = $state([]);
+	let { data } = $props();
 
-	// Update line numbers based on the number of lines in the content
 	const updateLineNumbers = () => {
 		lineNumbers = messageContent.split('\n').map((_, i) => i + 1);
 	};
 
-	// Initialize line numbers
 	updateLineNumbers();
 
-	// Handle `Tab` key for indentation in the textarea
 	const handleKeyDown = (e: KeyboardEvent) => {
 		if (e.key === 'Tab') {
 			e.preventDefault();
@@ -24,21 +24,17 @@
 			const start = textarea.selectionStart;
 			const end = textarea.selectionEnd;
 
-			// Insert indentation (2 spaces or \t for tabs)
-			const indent = '  '; // Use '\t' for actual tabs
+			const indent = '  ';
 			const before = messageContent.substring(0, start);
 			const after = messageContent.substring(end);
 
-			// Temporarily disable reactivity for cursor handling
 			messageContent = before + indent + after;
 
-			// Defer cursor position restoration to next tick
 			requestAnimationFrame(() => {
 				textarea.setSelectionRange(start + indent.length, start + indent.length);
 				textarea.focus();
 			});
 
-			// Update line numbers
 			updateLineNumbers();
 		}
 	};
@@ -60,6 +56,7 @@
 					name="name"
 					placeholder="Enter test name"
 					class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+					required
 				/>
 			</div>
 
@@ -73,6 +70,7 @@
 					name="description"
 					placeholder="Enter test description"
 					class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+					required
 				/>
 			</div>
 
@@ -87,6 +85,7 @@
 							value="email"
 							bind:group={selectedCategory}
 							class="h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500"
+							checked
 						/>
 						<label for="category-email" class="ml-2 text-sm text-gray-700">Email</label>
 					</div>
@@ -126,36 +125,20 @@
 					class="mt-1 block rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
 				>
 					<option value="" disabled selected>Choose a group</option>
-					<option value="management">IT</option>
-					<option value="engineering">HR</option>
-					<option value="sales">Sales</option>
-					<option value="support">Support</option>
+					{#each data.groups as group}
+						<option value={group.name.toLowerCase()}>{group.name}</option>
+					{/each}
 				</select>
 			</div>
-
-			<!-- <div>
-				<label for="content" class="block text-sm font-medium text-gray-700">Edit content</label>
-				<textarea
-					bind:value={messageContent}
-					id="content"
-					rows="4"
-					placeholder="Enter content here..."
-					name="content"
-					class="mt-1 block min-h-80 w-full rounded-lg border border-gray-300 p-4 text-sm placeholder-gray-400 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
-					required
-				></textarea>
-			</div> -->
 
 			<div class="relative w-full md:w-1/2">
 				<label for="html-editor" class="mb-2 block text-lg font-medium">HTML Editor</label>
 				<div class="flex">
-					<!-- Line Numbers -->
 					<div class="bg-gray-100 px-2 py-4 text-center leading-5 text-gray-500">
 						{#each lineNumbers as line}
 							<div>{line}</div>
 						{/each}
 					</div>
-					<!-- Textarea -->
 					<textarea
 						id="html-editor"
 						name="content"

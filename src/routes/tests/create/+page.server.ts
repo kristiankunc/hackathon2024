@@ -1,6 +1,10 @@
 import { fail, redirect, type Actions } from '@sveltejs/kit';
 import { prisma } from '$lib/prisma';
 import type { Prisma } from '@prisma/client';
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 interface Employee {
 	id: number;
@@ -8,11 +12,18 @@ interface Employee {
 	employeeCategoryId: number;
 }
 
+export const load = async () => {
+	const groups = await prisma.employeeCategory.findMany({
+		distinct: ['name'] // unique values
+	});
+	console.log(groups);
+
+	return { groups };
+};
+
 export const actions = {
 	createTest: async ({ request, locals }) => {
 		const data = await request.formData();
-
-		const domain = request.url.split('/').at(2);
 
 		const name = data.get('name');
 		const description = data.get('description');
@@ -20,7 +31,6 @@ export const actions = {
 		const employeeGroup = data.get('employeeGroup');
 		const messageContent = data.get('content');
 
-		console.log(messageContent);
 
 		if (!name) {
 			return fail(400, { title: 'Name is required' });
@@ -32,6 +42,14 @@ export const actions = {
 
 		if (!messageContent) {
 			return fail(400, { title: 'Message content is required' });
+		}
+
+		if (!category) {
+			return fail(400, { title: 'Category is required' });
+		}
+
+		if (!employeeGroup) {
+			return fail(400, { title: 'Employee group is required' });
 		}
 
 		if (typeof name !== 'string') {
@@ -58,7 +76,6 @@ export const actions = {
 		});
 
 		await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
-			console.log('Creating test:', name, description, messageContent);
 			const test = await tx.test.create({
 				data: {
 					name,
@@ -90,34 +107,40 @@ export const actions = {
 		});
 
 		const sendEmail = async (email: string) => {
-			const emailData = {
-				to: email,
-				subject: name,
-				text: messageContent
-			};
-
 			try {
-				console.log('Sending email:', emailData);
-				const response = await fetch('http://' + domain + '/send-email', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify(emailData)
+				// Nastavení Nodemailer transportu
+				const transporter = nodemailer.createTransport({
+					service: 'gmail',
+					auth: {
+						user: process.env.EMAIL_USER, // Váš Gmail
+						pass: process.env.EMAIL_PASS // Heslo aplikace
+					}
 				});
-
-				if (!response.ok) {
-					throw new Error(`HTTP error! status: ${response.status}`);
-				}
-
-				console.log('Email sent:', emailData);
+		
+				// Odeslání e-mailu
+				await transporter.sendMail({
+					from: process.env.EMAIL_USER, // Výchozí odesílatel
+					to: email,
+					subject: name,
+					text: messageContent as string
+				});
+		
+				return new Response(JSON.stringify({ message: 'E-mail odeslán!' }), {
+					status: 200,
+					headers: { 'Content-Type': 'application/json' }
+				});
 			} catch (error) {
-				console.error('Error sending email:', error);
+				console.error('Chyba při odesílání e-mailu:', error);
+		
+				return new Response(JSON.stringify({ error: 'Chyba při odesílání e-mailu.' }), {
+					status: 500,
+					headers: { 'Content-Type': 'application/json' }
+				});
 			}
+			
 		};
 
 		if (category === 'email') {
-			console.log(employees);
 			for (let employee of employees) {
 				sendEmail(employee.email);
 			}
@@ -128,7 +151,6 @@ export const actions = {
 		} else {
 			console.log('Unknown category');
 		}
-		console.log('Category:', category);
 
 		throw redirect(303, `/tests`);
 	}

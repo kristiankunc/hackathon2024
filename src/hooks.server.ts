@@ -1,29 +1,37 @@
 import { sequence } from '@sveltejs/kit/hooks';
 import { handle as authHandle } from '$lib/auth';
 import type { Handle } from '@sveltejs/kit';
+import { log } from 'console';
 
 const setLocals: Handle = async ({ event, resolve }) => {
-	const authSession = await event.locals.auth();
+  const authSession = await event.locals.auth();
 
-	if (!authSession) {
-		return new Response(null, {
-			status: 302,
-			headers: {
-				Location: '/auth/signin'
-				// location: '/landing'
-			}
-		});
-	}
+  const domain = event.url.toString().split('/').at(2);
+  log(domain);
 
-	if (authSession?.user?.name && authSession?.user?.email && authSession?.user?.image) {
-		event.locals.user = {
-			name: authSession.user.name,
-			email: authSession.user.email,
-			image: authSession.user.image
-		};
-	}
+  if (
+    !authSession &&
+    event.url.href != 'http://' + domain + '/landing' &&
+    event.url.href != 'http://' + domain + '/auth/signin'
+  ) {
+    return new Response(null, {
+      status: 302,
+      headers: {
+        // Location: '/auth/signin'
+        Location: '/landing'
+      }
+    });
+  }
 
-	return resolve(event);
+  if (authSession?.user?.name && authSession?.user?.email && authSession?.user?.image) {
+    event.locals.user = {
+      name: authSession.user.name,
+      email: authSession.user.email,
+      image: authSession.user.image
+    };
+  }
+
+  return resolve(event);
 };
 
 export const handle = sequence(authHandle, setLocals);

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Error, { showError } from '$lib/components/error.svelte';
 	import Navbar from '$lib/components/navbar.svelte';
-	import Sidebar from '$lib/components/sidebar.svelte';
 	import { onMount } from 'svelte';
 	import '../app.css';
 	import { page } from '$app/stores';

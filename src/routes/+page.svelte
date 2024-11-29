@@ -16,7 +16,7 @@
 		<h1 class="w-1/2 text-5xl font-semibold text-background">
 			Employees are the first line of defense against cyber attacks.
 		</h1>
-		<div class="my-16 w-2/3 rounded-lg bg-background p-8 opacity-90">
+		<div class="my-16 w-2/3 rounded-lg bg-background p-8 opacity-75">
 			<div class="flex justify-between gap-8">
 				<div class="grow">
 					<h3 class="mb-4 text-5xl font-bold text-secondary">3.4 bil.</h3>
@@ -41,7 +41,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="mx-auto w-2/3 rounded-lg bg-background bg-opacity-90 p-8">
+		<div class="mx-auto w-2/3 rounded-lg bg-background bg-opacity-75 p-8">
 			<h2 class="mb-8 text-2xl font-semibold">
 				Let us help you protect your business with PhishTest.
 			</h2>

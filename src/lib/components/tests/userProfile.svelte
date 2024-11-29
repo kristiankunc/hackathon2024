@@ -13,13 +13,13 @@
 	</div>
 	<div class="flex items-center gap-8">
 		{#if log.latestLog.action == 'READ'}
-			<span class="material-symbols-outlined text-[#51c6aa]">check</span>
+			<span class="material-symbols-outlined text-accent">visibility</span>
 		{:else if log.latestLog.action == 'CLICKED'}
 			<span class="material-symbols-outlined text-[#cf7d6d]">warning</span>
 		{:else}
-			<span class="material-symbols-outlined text-primary">visibility_off</span>
+			<span class="material-symbols-outlined text-[#51c6aa]">visibility_off</span>
 		{/if}
-		<Button preset="borderless" colorScheme="text">
+		<Button preset="borderless" colorScheme="text" href="/employees/{log.employee.id}">
       <span class="material-symbols-outlined">more_vert</span>
 		</Button>
 	</div>

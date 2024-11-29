@@ -2,6 +2,7 @@
 	import Button from '../ui/button.svelte';
 
 	let { propTests } = $props();
+  console.log(propTests);
 </script>
 
 <div class="rounded-lg border bg-background">

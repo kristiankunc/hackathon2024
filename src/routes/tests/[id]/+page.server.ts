@@ -39,7 +39,20 @@ export const load = async ({ params }: { params: { id: string } }) => {
 	if (!test) {
 		throw new Error(`Test with ID ${testId} not found`);
 	}
+	const employees = await prisma.employee.findMany({
+		include: {
+			logs: {
+				where: { testId },
+				orderBy: { createdAt: 'desc' },
+				take: 1
+			}
+		}
+	});
 
+	const detailedLogs = employees.map((employee) => ({
+		employee,
+		latestLog: employee.logs[0] || null // Handle case where no log exists
+	}));
 	// Návrat dat
-	return { successRate, test };
+	return { successRate, test, logs: detailedLogs };
 };

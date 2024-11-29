@@ -19,7 +19,7 @@
 		{#if data.tests?.length > 0}
 			<TestTable propTests={data.tests} />
 		{:else}
-			<p class="text-primary">No tests found. Please add a new test.</p>
+			<p class="text-primary text-center">No tests found. Please add a new test.</p>
 		{/if}
 	</section>
 </div>

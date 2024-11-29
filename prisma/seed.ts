@@ -1,78 +1,84 @@
 import { LogAction, PrismaClient } from '@prisma/client';
+import { faker } from '@faker-js/faker';
 
 const prisma = new PrismaClient();
 
 const actions = ['SENT', 'READ', 'CLICKED'];
 
 const main = async () => {
-	const test = await prisma.test.create({
-		data: {
-			name: 'Test with logs',
-			description: 'test that includes a few logs',
-			messageContent: 'This is a test message'
-		}
-	});
-
-	await prisma.employeeCategory.createMany({
-		data: [
-			{ name: 'IT', description: 'IT Department' },
-			{ name: 'HR', description: 'HR Department' },
-			{ name: 'Finance', description: 'Finance Department' },
-			{ name: 'Marketing', description: 'Marketing Department' },
-			{ name: 'Sales', description: 'Sales Department' }
-		]
-	});
-
-	await prisma.employee.createMany({
-		data: [
-			{ firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', employeeCategoryId: 1 },
-			{ firstName: 'Jane', lastName: 'Doe', email: 'jane.doe@example.com', employeeCategoryId: 2 },
-			{
-				firstName: 'Alice',
-				lastName: 'Smith',
-				email: 'alice.smith@example.com',
-				employeeCategoryId: 3
-			},
-			{
-				firstName: 'Bob',
-				lastName: 'Brown',
-				email: 'bob.brown@example.com',
-				employeeCategoryId: 4
-			},
-			{
-				firstName: 'Charlie',
-				lastName: 'White',
-				email: 'charlie.white@example.com',
-				employeeCategoryId: 5
-			}
-		]
-	});
-
-	const allEmployees = await prisma.employee.findMany();
-
-	for (const employee of allEmployees) {
-		const logCount = Math.floor(Math.random() * 3) + 1;
-
-		for (let i = 0; i < logCount; i++) {
-			await prisma.log.create({
+	await prisma.$transaction(async (prisma) => {
+		for (let i = 0; i < 10; i++) {
+			await prisma.test.create({
 				data: {
-					action: actions[i] as LogAction,
-					createdAt: new Date(),
-					testId: test.id,
-					employeeId: employee.id
+					name: faker.lorem.words(3),
+					description: faker.lorem.sentence(),
+					messageContent: `<h1>${faker.lorem.words(3)}</h1><p>${faker.lorem.paragraph()}</p>`
 				}
 			});
 		}
-	}
+	});
 
-	await prisma.test.update({
-		where: {
-			id: test.id
-		},
-		data: {
-			employees: {
-				connect: allEmployees.map((employee) => ({ id: employee.id }))
+	await prisma.$transaction(async (prisma) => {
+		for (let i = 0; i < 5; i++) {
+			await prisma.employeeCategory.create({
+				data: {
+					name: faker.person.jobArea(),
+					description: faker.lorem.sentence()
+				}
+			});
+		}
+	});
+	const allCategories = await prisma.employeeCategory.findMany();
+
+	await prisma.$transaction(async (prisma) => {
+		for (const category of allCategories) {
+			for (let i = 0; i < 10; i++) {
+				await prisma.employee.create({
+					data: {
+						firstName: faker.person.firstName(),
+						lastName: faker.person.lastName(),
+						email: faker.internet.email(),
+						employeeCategoryId: category.id
+					}
+				});
 			}
+		}
+	});
+
+	const allEmployees = await prisma.employee.findMany();
+	const allTests = await prisma.test.findMany();
+
+	await prisma.$transaction(async (prisma) => {
+		for (const employee of allEmployees) {
+			const logCount = Math.floor(Math.random() * 3) + 1;
+
+			for (const test of allTests) {
+				for (let i = 0; i < logCount; i++) {
+					await prisma.log.create({
+						data: {
+							action: actions[i % actions.length] as LogAction,
+							createdAt: new Date(),
+							testId: test.id,
+							employeeId: employee.id
+						}
+					});
+				}
+			}
+		}
+	});
+
+	await prisma.$transaction(async (prisma) => {
+		for (const test of allTests) {
+			await prisma.test.update({
+				where: {
+					id: test.id
+				},
+				data: {
+					employees: {
+						connect: allEmployees.map((employee) => ({ id: employee.id }))
+					}
+				}
+			});
 		}
 	});
 };

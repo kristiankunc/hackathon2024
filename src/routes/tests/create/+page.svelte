@@ -75,7 +75,7 @@
 					type="text"
 					name="name"
 					placeholder="Enter test name"
-					class="mt-1 w-full rounded-lg border px-4 py-2 outline-none bg-background"
+					class="mt-1 w-full rounded-lg border bg-background px-4 py-2 outline-none"
 					required
 				/>
 			</div>
@@ -89,7 +89,7 @@
 					type="text"
 					name="description"
 					placeholder="Enter test description"
-					class="mt-1 w-full rounded-lg border px-4 py-2 outline-none bg-background"
+					class="mt-1 w-full rounded-lg border bg-background px-4 py-2 outline-none"
 					required
 				/>
 			</div>
@@ -135,14 +135,12 @@
 			</div>
 
 			<div>
-				<label for="employee-group" class="primary text-sm font-semibold"
-					>Employee Group</label
-				>
+				<label for="employee-group" class="primary text-sm font-semibold">Employee Group</label>
 				<select
 					id="employee-group"
 					name="employeeGroup"
 					bind:value={selectedGroup}
-					class="mt-1 p-2 bg-background rounded-lg border outline-none"
+					class="mt-1 rounded-lg border bg-background p-2 outline-none"
 				>
 					<option value="" disabled selected>Choose a group</option>
 					{#each data.groups as group}
@@ -150,14 +148,15 @@
 					{/each}
 				</select>
 			</div>
+
 			<div>
-				<label for="test-subject" class="block text-sm font-medium text-gray-700">Email Subject</label>
+				<label for="test-subject" class="primary block text-sm font-semibold">Email Subject</label>
 				<input
 					id="test-subject"
 					type="text"
 					name="subject"
 					placeholder="Enter email subject"
-					class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+					class="mt-1 w-full rounded-lg border bg-background px-4 py-2 outline-none"
 					required
 				/>
 			</div>
@@ -180,7 +179,9 @@
 						</div>
 					</div>
 					<div class="flex">
-						<div class="rounded-l-lg bg-background-900 px-2 py-4 text-center text-primary font-semibold leading-5">
+						<div
+							class="rounded-l-lg bg-background-900 px-2 py-4 text-center font-semibold leading-5 text-primary"
+						>
 							{#each lineNumbers as line}
 								<div>{line}</div>
 							{/each}

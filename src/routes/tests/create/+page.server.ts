@@ -32,7 +32,6 @@ export const actions = {
 		const messageContent = data.get('content');
 		const subject = data.get('subject')
 
-
 		if (!name) {
 			return fail(400, { title: 'Name is required' });
 		}
@@ -122,6 +121,7 @@ export const actions = {
 				await transporter.sendMail({
 					from: process.env.EMAIL_USER, // Výchozí odesílatel
 					to: "jakub@hanslikovi.com",
+          
 					subject: subject as string,
 					html: messageContent as string
 				});

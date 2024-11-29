@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import UserProfile from '$lib/components/tests/userProfile.svelte';
 	import { BarChart, Chart, ColorRamp, Pie, PieChart, Svg } from 'layerchart';
 
@@ -16,7 +17,6 @@
 	];
 
 	const keyColors = ['#51c6aa', '#cf7d6d'];
-	console.log(data.test.employees);
 </script>
 
 <div class="w-full p-8">
@@ -43,8 +43,8 @@
 		>
 			<h2 class="mb-4 font-semibold">Participants:</h2>
 
-			{#each data.test.employees as employee}
-				<UserProfile {employee} />
+			{#each $page.data.logs as log}
+				<UserProfile {log} />
 			{/each}
 
 			<!-- <UserProfile /> -->

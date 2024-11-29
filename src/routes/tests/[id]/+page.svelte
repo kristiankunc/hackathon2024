@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import UserProfile from '$lib/components/tests/userProfile.svelte';
 	import { BarChart, Chart, ColorRamp, Pie, PieChart, Svg } from 'layerchart';
 

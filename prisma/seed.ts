@@ -12,7 +12,8 @@ const main = async () => {
 				data: {
 					name: faker.lorem.words(3),
 					description: faker.lorem.sentence(),
-					messageContent: `<h1>${faker.lorem.words(3)}</h1><p>${faker.lorem.paragraph()}</p>`
+					messageContent: `<h1>${faker.lorem.words(3)}</h1><p>${faker.lorem.paragraph()}</p>`,
+					createdAt: faker.date.recent()
 				}
 			});
 		}

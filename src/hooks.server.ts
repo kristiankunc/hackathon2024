@@ -5,12 +5,14 @@ import { log } from 'console';
 
 const setLocals: Handle = async ({ event, resolve }) => {
   const authSession = await event.locals.auth();
-  log(event.url.href);
+
+  const domain = event.url.toString().split('/').at(2);
+  log(domain);
 
   if (
     !authSession &&
-    event.url.href != 'http://localhost:5173/landing' &&
-    event.url.href != 'http://localhost:5173/auth/signin'
+    event.url.href != 'http://' + domain + '/landing' &&
+    event.url.href != 'http://' + domain + '/auth/signin'
   ) {
     return new Response(null, {
       status: 302,
